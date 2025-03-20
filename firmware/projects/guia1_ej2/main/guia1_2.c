@@ -33,6 +33,7 @@
 /*==================[macros and definitions]=================================*/
 bool led1_status = false;
 bool led2_status = false;
+#define CONFIG_BLINK_PERIOD 1000
 /*==================[internal data definition]===============================*/
 
 /*==================[internal functions declaration]=========================*/
@@ -66,13 +67,14 @@ void app_main(void){
 			LedOff(LED_2);
 		}
 		break;
-		// case SWITCH_1 & SWITCH_2:
-		// if(led1_status==true & led2_status==true)
-		// LedOn(3);
-		// break;
+	}
+	if ((teclas & SWITCH_1) && (teclas & SWITCH_2)) {
+		LedOn(LED_3);
+	} else {
+		LedOff(LED_3);
 	}
 	}
-
+	vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
 	printf("Hello world!\n");
 }
 /*==================[end of file]============================================*/
