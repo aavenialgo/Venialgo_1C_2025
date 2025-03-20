@@ -1,7 +1,6 @@
 /*! @mainpage Blinking switch
  *
  * \section genDesc General Description
- *
  * This example makes LED_1 and LED_2 blink if SWITCH_1 or SWITCH_2 are pressed.
  *
  * @section changelog Changelog
