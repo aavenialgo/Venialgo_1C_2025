@@ -1,10 +1,7 @@
-/*! @mainpage Template
+/*! @mainpage Guia1_3
  *
- * @section genDesc General Description
+ * @section Ejercicio 3 del proyecto 1
  *
- * This section describes how the program works.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
  *
  * @section hardConn Hardware Connection
  *
@@ -19,13 +16,18 @@
  * |:----------:|:-----------------------------------------------|
  * | 12/09/2023 | Document creation		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Andres Venialgo
  *
  */
 
 /*==================[inclusions]=============================================*/
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "led.h"
+#include "switch.h"
 /*==================[macros and definitions]=================================*/
 typedef struct leds
 {
@@ -35,11 +37,31 @@ typedef struct leds
 	uint16_t periodo;   //  indica el tiempo de cada ciclo
 } my_leds; 
 
-
 /*==================[internal data definition]===============================*/
-
-
+#define ON = 1 ;
+#define OFF = 0 ;
+#define TOGGLE = 2 ;
+#define CONFIG_BLINK_PERIOD 1000
 /*==================[internal functions declaration]=========================*/
+void funcionLeds(my_leds *leds){
+	switch (leds->mode)
+	{
+	case ON:
+			LedOn(leds->n_led);
+		break;
+	case OFF:
+			LedOff(leds->n_led);
+		break;
+	case TOGGLE:
+	int retardo = leds->periodo / leds->n_ciclos;
+		for (int i = 0; i < leds->n_ciclos; i++) {
+			if (leds->n_led == 1)
+				LedToggle(leds->n_led );
+			for (int j=0; j< retardo; j++){
+				vTaskDelay(CONFIG_BLINK_PERIOD/portTICK_RATE_MS);	
+		}
+	}
+}
 
 /*==================[external functions definition]==========================*/
 void app_main(void){
