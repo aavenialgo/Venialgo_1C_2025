@@ -41,7 +41,7 @@ typedef struct leds
 #define ON 1 
 #define OFF 0 
 #define TOGGLE 2 
-#define CONFIG_BLINK_PERIOD 1000
+#define CONFIG_BLINK_PERIOD 100
 /*==================[internal functions declaration]=========================*/
 void funcionLeds(my_leds *leds){
 	switch (leds->mode)
@@ -53,14 +53,15 @@ void funcionLeds(my_leds *leds){
 			LedOff(leds->n_led);
 		break;
 	case (TOGGLE):
-	uint8_t retardo = leds->periodo / leds->n_ciclos;
+	uint8_t retardo = leds->periodo / CONFIG_BLINK_PERIOD;
 		for (int i = 0; i < leds->n_ciclos; i++) {
-			if (leds->n_led == 1)
-				LedToggle(leds->n_led );
+			printf("TOGGLE\n");	
+			LedToggle(leds->n_led );
 			for (int j=0; j < retardo; j++){
 				vTaskDelay(CONFIG_BLINK_PERIOD/portTICK_PERIOD_MS);	
 		}
 	}
+		break;
 }
 }
 
@@ -68,7 +69,7 @@ void funcionLeds(my_leds *leds){
 void app_main(void){
 	LedsInit();
 	printf("Hello world!\n");
-	my_leds prueba1 = {1, 3, 10, 1000};
+	my_leds prueba1 = {TOGGLE, LED_1, 10, 500};
 	funcionLeds(&prueba1);
 }
 /*==================[end of file]============================================*/
