@@ -39,6 +39,12 @@
 // #include "guia1_ej4.c"
 // #include "guia1_ej5.c"
 /*==================[macros and definitions]=================================*/
+typedef struct
+{
+	gpio_t pin;
+	io_t dir;
+} gpioConf_t;
+
 gpioConf_t gpio_map_bcd[4] = {
 	{GPIO_20, GPIO_OUTPUT},
 	{GPIO_21, GPIO_OUTPUT},
@@ -50,6 +56,7 @@ gpioConf_t gpio_map_digits[3] = {
 	{GPIO_18, GPIO_OUTPUT},
 	{GPIO_9, GPIO_OUTPUT}
 };
+
 /*==================[internal data definition]===============================*/
 	
 /*==================[internal functions declaration]=========================*/
@@ -59,7 +66,7 @@ int8_t convertToBcdArray(uint32_t data, uint8_t n_digits, uint8_t *bcd_number){
 		return -1;
 	}
 	for (int i = 0; i < n_digits; i++){
-		bcd_number[i] = data % 10;
+		bcd_number[n_digits-1-i] = data % 10;
 		data /= 10;
 	}
 	if (data >0){
@@ -86,18 +93,12 @@ void displayValueOnLcd(uint32_t value, uint8_t num_digits, gpioConf_t *bcd_vecto
 
 	for (int i = 0; i < num_digits; i++) {
 		setGpiosFromBcd(bcd_array[i], bcd_vector); // Configura los pines BCD
+		GPIOOn(digit_vector[i].pin);
 
-		for (int j = 0; j < num_digits; j++) {
-			if (i == j) {
-				GPIOOn(digit_vector[j].pin);
-			} else {
-				GPIOOff(digit_vector[j].pin);
-			}
-		}
+		GPIOOff(digit_vector[i].pin); 
 
-		vTaskDelay(5 / portTICK_PERIOD_MS); // Pequeño retardo de visualización
+		// vTaskDelay(5 / portTICK_PERIOD_MS); // Pequeño retardo de visualización
 
-		GPIOOff(digit_vector[i].pin); // Apaga el dígito después de mostrar
 	}
 }
 /*==================[external functions definition]==========================*/
