@@ -1,0 +1,44 @@
+bool measuring = true;
+bool hold = false;
+int distancia = 0; 
+
+void readKey( void *pParameter){
+    switch{
+    case SWITCH_1:
+        measuring = !measuring
+    case SWITCH_2:
+        hold = !hold
+    }  
+}
+
+
+vtaskreadkey ( 
+void showDistance(void *pParameter){
+		if(measuring){     //lo puedo pausar con el boton 1
+			if(distancia<10){
+				LedOff(LED_1);
+				LedOff(LED_2);
+				LedOff(LED_3);
+			} 
+          else if(distancia < 20){
+				LedOn(LED_1);
+				LedOff(LED_2);
+				LedOff(LED_3);
+			} 
+          else if (distancia < 30){
+				LedOn(LED_1);
+				LedOn(LED_2);
+				LedOff(LED_3);
+			} 
+          else {
+              LedOn(LED_1);
+              LedOn(LED_2);
+              LedOn(LED_3);
+          }
+		}
+		if(!hold)     // Lo congelo con boton 2
+    {
+			LcdItsE0803Write(distancia);
+		}
+	  vTaskDelay(100/ portTICK_PERIOD_MS); }
+}
