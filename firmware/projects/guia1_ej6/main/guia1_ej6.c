@@ -1,20 +1,20 @@
 /*! @mainpage Guia1
  *
- * @section Enunciado del problema:
- Escriba una función que reciba un dato de 32 bits,  la cantidad de dígitos 
- de salida y dos vectores de estructuras del tipo  gpioConf_t. 
- Uno  de estos vectores es igual al definido en el punto anterior 
- y el otro vector mapea los puertos con el dígito del LCD a donde
- mostrar un dato:
-
- Dígito 1 -> GPIO_19
- Dígito 2 -> GPIO_18
- Dígito 3 -> GPIO_9
-
- La función deberá mostrar por display el valor que recibe. 
- Reutilice las funciones creadas en el punto 4 y 5
+ * @section genDesc General Description
+ * Escriba una función que reciba un dato de 32 bits,  la cantidad de dígitos 
+ * de salida y dos vectores de estructuras del tipo  gpioConf_t. 
+ * Uno  de estos vectores es igual al definido en el punto anterior 
+ * y el otro vector mapea los puertos con el dígito del LCD a donde
+ * mostrar un dato:
  *
- * @section Proyecto 1
+ * Dígito 1 -> GPIO_19
+ * Dígito 2 -> GPIO_18
+ * Dígito 3 -> GPIO_9
+ *
+ * La función deberá mostrar por display el valor que recibe. 
+ * Reutilice las funciones creadas en el punto 4 y 5
+ *
+ * @section hardConn Hardware Connection
  *
  * |    Peripheral  |   ESP32   	|
  * |:--------------:|:--------------|
@@ -36,18 +36,37 @@
 #include <stdint.h>
 #include "gpio_mcu.h"
 /*==================[macros and definitions]=================================*/
+/**
+ * @brief Estructura para configurar un pin GPIO.
+ *
+ * @details Esta estructura define un pin GPIO y su dirección (entrada o salida).
+ *
+ * @param pin Identificador del pin GPIO.
+ * @param dir Dirección del GPIO (entrada o salida).
+ */
 typedef struct
 {
 	gpio_t pin;
 	io_t dir;
 } gpioConf_t;
-
+/**
+ * @brief Mapeo de pines GPIO para los bits del valor BCD.
+ *
+ * @details Este arreglo contiene la configuración de los pines GPIO que
+ * representan los bits de un valor en formato BCD.
+ */
 gpioConf_t gpio_map_bcd[4] = {
 	{GPIO_20, GPIO_OUTPUT},
 	{GPIO_21, GPIO_OUTPUT},
 	{GPIO_22, GPIO_OUTPUT},
 	{GPIO_23, GPIO_OUTPUT}
 };
+/**
+ * @brief Mapeo de pines GPIO para los dígitos del display.
+ *
+ * @details Este arreglo contiene la configuración de los pines GPIO que 
+ * representan los dígitos del display donde se mostrará el valor.
+ */
 gpioConf_t gpio_map_digits[3] = {
 	{GPIO_19, GPIO_OUTPUT},
 	{GPIO_18, GPIO_OUTPUT},
@@ -59,12 +78,10 @@ gpioConf_t gpio_map_digits[3] = {
 /*==================[internal functions declaration]=========================*/
 /**
  * @brief Convierte un número entero en un arreglo de dígitos en formato BCD.
- *
  * @param data Número de 32 bits a convertir.
  * @param n_digits Cantidad de dígitos que se desea obtener.
  * @param bcd_number Puntero al arreglo donde se almacenarán los dígitos en formato BCD.
  * @return int8_t Devuelve 0 si la conversión fue exitosa, -1 si el número tiene más dígitos que los permitidos.
- *
  * @note El arreglo `bcd_number` debe tener suficiente espacio para almacenar `n_digits`.
  */
 int8_t convertToBcdArray(uint32_t data, uint8_t n_digits, uint8_t *bcd_number){
