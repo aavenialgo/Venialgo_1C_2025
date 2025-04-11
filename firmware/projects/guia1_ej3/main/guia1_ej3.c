@@ -43,6 +43,18 @@ typedef struct leds
 #define TOGGLE 2 
 #define CONFIG_BLINK_PERIOD 100
 /*==================[internal functions declaration]=========================*/
+/**
+ * @brief Controla el comportamiento de un LED según el modo especificado.
+ *
+ * @param leds Puntero a una estructura `my_leds` que contiene la configuración del LED:
+ * - `mode`: Modo de operación del LED (ON, OFF, TOGGLE).
+ * - `n_led`: Número del LED a controlar.
+ * - `n_ciclos`: Cantidad de ciclos de encendido/apagado (solo para TOGGLE).
+ * - `periodo`: Tiempo de duración de cada ciclo en milisegundos (solo para TOGGLE).
+ *
+ * @note En el modo TOGGLE, el LED alterna entre encendido y apagado durante el número de ciclos especificado,
+ *       con un retardo configurado por el período dividido en intervalos de `CONFIG_BLINK_PERIOD`.
+ */
 void funcionLeds(my_leds *leds){
 	switch (leds->mode)
 	{

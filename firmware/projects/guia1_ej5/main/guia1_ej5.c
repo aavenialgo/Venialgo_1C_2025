@@ -1,10 +1,17 @@
 /*! @mainpage Template
  *
  * @section genDesc General Description
+ * Escribir una función que reciba como parámetro un dígito BCD y 
+ * un vector de estructuras del tipo gpioConf_t.
+ * Defina un vector que mapee los bits de la siguiente manera:
+ *  b0 -> GPIO_20
+ *  b1 ->  GPIO_21
+ *  b2 -> GPIO_22
+ *  b3 -> GPIO_23
+ * La función deberá cambiar el estado de cada GPIO, a ‘0’ o a ‘1’, 
+ * según el estado del bit correspondiente en el BCD ingresado. 
+ * Ejemplo: b0 se encuentra en ‘1’, el estado de GPIO_20 debe setearse. 
  *
- * This section describes how the program works.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
  *
  * @section hardConn Hardware Connection
  *
@@ -42,6 +49,15 @@ gpioConf_t gpio_map[4] = {
 };
 
 /*==================[internal functions declaration]=========================*/
+/**
+ * @brief Configura los GPIOs según un valor en formato BCD.
+ *
+ * @param bcd Valor en formato BCD (4 bits).
+ * @param gpio_vector Vector de estructuras `gpioConf_t` que mapea los pines GPIO a los bits del BCD.
+ *
+ * @note Cambia el estado de cada GPIO a '0' o '1' según el estado del bit correspondiente en el valor BCD.
+ *       También imprime en consola el estado de cada GPIO configurado.
+ */
 void setGpiosFromBcd(uint8_t bcd, gpioConf_t *gpio_vector) {
     /**
      * @brief Set GPIOs based on BCD value

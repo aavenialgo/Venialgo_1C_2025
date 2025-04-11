@@ -18,7 +18,7 @@
  * |:----------:|:-----------------------------------------------|
  * | 17/09/2023 | Document creation		                         |
  *
- * @author chui 
+ * @author Andres Venialgo
  *
  */
 

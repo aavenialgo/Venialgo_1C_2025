@@ -18,7 +18,7 @@
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 03/12/25 | Document creation		                         |
  *
  * @author Andres Venialgo
  *
@@ -34,6 +34,16 @@
 /*==================[internal data definition]===============================*/
 
 /*==================[internal functions declaration]=========================*/
+/**
+ * @brief Convierte un número entero en un arreglo de dígitos en formato BCD.
+ *
+ * @param data Número de 32 bits a convertir.
+ * @param n_digits Cantidad de dígitos que se desea obtener.
+ * @param bcd_number Puntero al arreglo donde se almacenarán los dígitos en formato BCD.
+ * @return int8_t Devuelve 0 si la conversión fue exitosa, -1 si el número tiene 
+ * más dígitos que los permitidos.
+ * @note El arreglo `bcd_number` debe tener suficiente espacio para almacenar `n_digits`.
+ */
 int8_t convertToBcdArray(uint32_t data, uint8_t n_digits, uint8_t *bcd_number){
 	if (n_digits > 10){
 		return -1;
