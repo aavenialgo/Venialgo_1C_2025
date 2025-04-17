@@ -4,8 +4,6 @@
  *
  * This section describes how the program works.
  *
- * <a href="https://drive.google.com/...">Operation Example</a>
- *
  * @section hardConn Hardware Connection
  *
  * |    Peripheral  |   ESP32   	|
@@ -41,17 +39,23 @@ TaskHandle_t measure_task = NULL;
 TaskHandle_t readKey_task = NULL;
 TaskHandle_t display_task = NULL;
 bool measuring = true;
+int8_t tecla;
 bool hold = false;
 uint8_t distance = 0;
 /*==================[internal functions declaration]=========================*/
 static void readKeyTask(void *pParameter){
-    switch{
+    while(true){
+    
+    switch( SwitchesRead() ){
         case SWITCH_1:
         measuring = !measuring;
         break;
         case SWITCH_2:
         hold = !hold;
         break;
+    }
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+    
     }
 }
 
@@ -98,11 +102,12 @@ static void showDistanceTask(void *pParameter){
 void app_main(void){
     LcdItsE0803Init();
     HcSr04Init(GPIO_3, GPIO_2); //Ver cual conectar
+    SwitchesInit();
     ledInit(LED_1);
     ledInit(LED_2);
     ledInit(LED_3);
-    xTaskCreate(&measureDistanceTask, "Measure Distance", 2048, NULL, 5, &measure_task);
-    xTaskCreate(&readKeyTask, "Read Key", 2048, NULL, 5, &readKey_task);
+    xTaskCreate(&measureDistanceTask, "Measure Distance", 512, NULL, 5, &measure_task);
+    xTaskCreate(&readKeyTask, "Read Key", 512, NULL, 5, &readKey_task);
     xTaskCreate(&showDistanceTask, "Show Distance", 512, NULL, 5, &display_task);
 }
 /*==================[end of file]============================================*/
