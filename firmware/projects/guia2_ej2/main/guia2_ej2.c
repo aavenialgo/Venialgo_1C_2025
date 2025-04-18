@@ -31,10 +31,24 @@
 #include "lcditse0803.h"
 #include "led.h"
 #include "switch.h"
+#include "timer_mcu.h" 
 /*==================[macros and definitions]=================================*/
 #define CONFIG_MEASURE_PERIOD 1000
 #define CONFIG_DISPLAY_PERIOD 1000
 /*==================[internal data definition]===============================*/
+timer_config_t timer_measure = {
+    .timer = TIMER_A,
+    .period = 1000000,
+    .func_p = functionMeasure,
+    .param_p = NULL
+};
+timer_config_t timer_display = {
+    .timer = TIMER_B,
+    .period = 1000,
+    .func_p = functionDisplay,
+    .param_p = NULL
+};
+
 TaskHandle_t measure_task = NULL;
 TaskHandle_t readKey_task = NULL;
 TaskHandle_t display_task = NULL;
@@ -98,14 +112,30 @@ static void showDistanceTask(void *pParameter){
     }
 }
 
-/*==================[external functions definition]==========================*/
-void app_main(void){
+void inicializePeripherals(){
     LcdItsE0803Init();
     HcSr04Init(GPIO_3, GPIO_2); //Ver cual conectar
     SwitchesInit();
     ledInit(LED_1);
     ledInit(LED_2);
     ledInit(LED_3);
+    TimerInit(&timer_measure);
+    TimerInit(&timer_display);
+}
+
+void functionMeasure(void* param){
+  vTaskNotifyGiveFromISR(measure_task, pdFALSE); // Notifica a la tarea de medida
+}
+void functionDisplay(void* param){
+  vTaskNotifyGiveFromISR(display_task, pdFALSE); // Notifica a la tarea de display
+}
+void functionKey(void* param){
+  vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
+}
+/*==================[external functions definition]==========================*/
+void app_main(void){
+    inicializePeripherals();
+
     xTaskCreate(&measureDistanceTask, "Measure Distance", 512, NULL, 5, &measure_task);
     xTaskCreate(&readKeyTask, "Read Key", 512, NULL, 5, &readKey_task);
     xTaskCreate(&showDistanceTask, "Show Distance", 512, NULL, 5, &display_task);
