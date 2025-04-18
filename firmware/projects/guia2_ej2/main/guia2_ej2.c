@@ -36,18 +36,7 @@
 #define CONFIG_MEASURE_PERIOD 1000
 #define CONFIG_DISPLAY_PERIOD 1000
 /*==================[internal data definition]===============================*/
-timer_config_t timer_measure = {
-    .timer = TIMER_A,
-    .period = 1000000,
-    .func_p = functionMeasure,
-    .param_p = NULL
-};
-timer_config_t timer_display = {
-    .timer = TIMER_B,
-    .period = 1000000,
-    .func_p = functionDisplay,
-    .param_p = NULL
-};
+
 
 TaskHandle_t measure_task = NULL;
 TaskHandle_t readKey_task = NULL;
@@ -86,22 +75,22 @@ static void showDistanceTask(void *pParameter){
     while(true){
         if (measuring) {
             if (distance < 10){
-                ledOff(LED_1);
-                ledOff(LED_2);
-                ledOff(LED_3);
+                LedOff(LED_1);
+                LedOff(LED_2);
+                LedOff(LED_3);
             } else if (distance < 20){
-                ledOn(LED_1);
-                ledOn(LED_2);
-                ledOff(LED_3);
+                LedOn(LED_1);
+                LedOn(LED_2);
+                LedOff(LED_3);
             } else if (distance < 30){
-                ledOn(LED_1);
-                ledOn(LED_2);
-                ledOff(LED_3);
+                LedOn(LED_1);
+                LedOn(LED_2);
+                LedOff(LED_3);
             }
             else {
-                ledOn(LED_1);
-                ledOn(LED_2);
-                ledOn(LED_3);
+                LedOn(LED_1);
+                LedOn(LED_2);
+                LedOn(LED_3);
             }
         }
         if(!hold){ // si hold = false, escribo en el display
@@ -113,13 +102,10 @@ static void showDistanceTask(void *pParameter){
 
 void inicializePeripherals(){
     LcdItsE0803Init();
-    HcSr04Init(GPIO_3, GPIO_2); //Ver cual conectar
+    HcSr04Init(GPIO_3, GPIO_2); 
     SwitchesInit();
-    ledInit(LED_1);
-    ledInit(LED_2);
-    ledInit(LED_3);
-    TimerInit(&timer_measure);
-    TimerInit(&timer_display);
+    LedsInit();
+
 }
 
 void functionMeasure(void* param){
@@ -128,11 +114,27 @@ void functionMeasure(void* param){
 void functionDisplay(void* param){
   vTaskNotifyGiveFromISR(display_task, pdFALSE); // Notifica a la tarea de display
 }
-void functionKey(void* param){
-  vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
-}
+// void functionKey(void* param){
+//   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
+// }
 /*==================[external functions definition]==========================*/
 void app_main(void){
+    timer_config_t timer_measure = {
+        .timer = TIMER_A,
+        .period = 1000000,
+        .func_p = functionMeasure,
+        .param_p = NULL
+    };
+    timer_config_t timer_display = {
+        .timer = TIMER_B,
+        .period = 1000000,
+        .func_p = functionDisplay,
+        .param_p = NULL
+    };
+
+    TimerInit(&timer_measure);
+    TimerInit(&timer_display);
+    
     inicializePeripherals();
 
     xTaskCreate(&measureDistanceTask, "Measure Distance", 512, NULL, 5, &measure_task);
@@ -141,6 +143,6 @@ void app_main(void){
 
     TimerStart(timer_measure.timer);
     TimerStart(timer_display.timer);
-    
+
 }
 /*==================[end of file]============================================*/

@@ -73,22 +73,22 @@ static void showDistanceTask(void *pParameter){
     while(true){
         if (measuring) {
             if (distance < 10){
-                ledOff(LED_1);
-                ledOff(LED_2);
-                ledOff(LED_3);
+                LedOff(LED_1);
+                LedOff(LED_2);
+                LedOff(LED_3);
             } else if (distance < 20){
-                ledOn(LED_1);
-                ledOn(LED_2);
-                ledOff(LED_3);
+                LedOn(LED_1);
+                LedOn(LED_2);
+                LedOff(LED_3);
             } else if (distance < 30){
-                ledOn(LED_1);
-                ledOn(LED_2);
-                ledOff(LED_3);
+                LedOn(LED_1);
+                LedOn(LED_2);
+                LedOff(LED_3);
             }
             else {
-                ledOn(LED_1);
-                ledOn(LED_2);
-                ledOn(LED_3);
+                LedOn(LED_1);
+                LedOn(LED_2);
+                LedOn(LED_3);
             }
         }
         if(!hold){ // si hold = false, escribo en el display
@@ -103,9 +103,7 @@ void app_main(void){
     LcdItsE0803Init();
     HcSr04Init(GPIO_3, GPIO_2); //Ver cual conectar
     SwitchesInit();
-    ledInit(LED_1);
-    ledInit(LED_2);
-    ledInit(LED_3);
+    LedsInit();
     xTaskCreate(&measureDistanceTask, "Measure Distance", 512, NULL, 5, &measure_task);
     xTaskCreate(&readKeyTask, "Read Key", 512, NULL, 5, &readKey_task);
     xTaskCreate(&showDistanceTask, "Show Distance", 512, NULL, 5, &display_task);
