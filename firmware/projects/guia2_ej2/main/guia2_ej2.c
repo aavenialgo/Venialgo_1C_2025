@@ -44,7 +44,7 @@ timer_config_t timer_measure = {
 };
 timer_config_t timer_display = {
     .timer = TIMER_B,
-    .period = 1000,
+    .period = 1000000,
     .func_p = functionDisplay,
     .param_p = NULL
 };
@@ -68,8 +68,7 @@ static void readKeyTask(void *pParameter){
         hold = !hold;
         break;
     }
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-    
+    ulTaskNotifyTake(pdTRUE, portMAX_DELAY); 
     }
 }
 
@@ -140,6 +139,8 @@ void app_main(void){
     xTaskCreate(&readKeyTask, "Read Key", 512, NULL, 5, &readKey_task);
     xTaskCreate(&showDistanceTask, "Show Distance", 512, NULL, 5, &display_task);
 
+    TimerStart(timer_measure.timer);
+    TimerStart(timer_display.timer);
     
 }
 /*==================[end of file]============================================*/
