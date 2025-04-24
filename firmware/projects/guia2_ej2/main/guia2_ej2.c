@@ -2,7 +2,9 @@
  *
  * @section genDesc General Description
  *
- * This section describes how the program works.
+ * Cree un nuevo proyecto en el que modifique la actividad del 
+ * punto 1 de manera de utilizar interrupciones para el control 
+ * de las teclas y el control de tiempos (Timers). 
  *
  * @section hardConn Hardware Connection
  *
@@ -65,7 +67,7 @@ static void measureDistanceTask(void *pParameter){
     while(true){
         if(measuring){
             distance = HcSr04ReadDistanceInCentimeters();
-            printf("Distance: %d cm\n", distance);
+           // printf("Distance: %d cm\n", distance);
         }
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // Espera a que se notifique
     }
@@ -80,7 +82,7 @@ static void showDistanceTask(void *pParameter){
                 LedOff(LED_3);
             } else if (distance < 20){
                 LedOn(LED_1);
-                LedOn(LED_2);
+                LedOff(LED_2);
                 LedOff(LED_3);
             } else if (distance < 30){
                 LedOn(LED_1);
@@ -114,14 +116,14 @@ void functionMeasure(void* param){
 void functionDisplay(void* param){
   vTaskNotifyGiveFromISR(display_task, pdFALSE); // Notifica a la tarea de display
 }
-// void functionKey(void* param){
-//   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
-// }
+void functionKey(void* param){
+   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
+ }
 /*==================[external functions definition]==========================*/
 void app_main(void){
     timer_config_t timer_measure = {
         .timer = TIMER_A,
-        .period = 1000000,
+        .period = 100000,
         .func_p = functionMeasure,
         .param_p = NULL
     };
@@ -137,8 +139,8 @@ void app_main(void){
     
     inicializePeripherals();
 
-    xTaskCreate(&measureDistanceTask, "Measure Distance", 512, NULL, 5, &measure_task);
-    xTaskCreate(&readKeyTask, "Read Key", 512, NULL, 5, &readKey_task);
+    xTaskCreate(&measureDistanceTask, "Measure Distance", 2048, NULL, 5, &measure_task);
+    xTaskCreate(&readKeyTask, "Read Key", 2048, NULL, 5, &readKey_task);
     xTaskCreate(&showDistanceTask, "Show Distance", 512, NULL, 5, &display_task);
 
     TimerStart(timer_measure.timer);
