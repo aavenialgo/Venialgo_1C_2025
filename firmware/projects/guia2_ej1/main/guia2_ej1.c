@@ -27,7 +27,7 @@
 #include <stdbool.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "hc_sr04.h"
+#include "hc_sr04n.h"
 #include "lcditse0803.h"
 #include "led.h"
 #include "switch.h"
@@ -78,7 +78,7 @@ static void showDistanceTask(void *pParameter){
                 LedOff(LED_3);
             } else if (distance < 20){
                 LedOn(LED_1);
-                LedOn(LED_2);
+                LedOff(LED_2);
                 LedOff(LED_3);
             } else if (distance < 30){
                 LedOn(LED_1);
@@ -104,8 +104,8 @@ void app_main(void){
     HcSr04Init(GPIO_3, GPIO_2); //Ver cual conectar
     SwitchesInit();
     LedsInit();
-    xTaskCreate(&measureDistanceTask, "Measure Distance", 512, NULL, 5, &measure_task);
-    xTaskCreate(&readKeyTask, "Read Key", 512, NULL, 5, &readKey_task);
+    xTaskCreate(&measureDistanceTask, "Measure Distance", 2048, NULL, 5, &measure_task);
+    xTaskCreate(&readKeyTask, "Read Key", 2048, NULL, 5, &readKey_task);
     xTaskCreate(&showDistanceTask, "Show Distance", 512, NULL, 5, &display_task);
 }
 /*==================[end of file]============================================*/
