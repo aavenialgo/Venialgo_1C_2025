@@ -45,7 +45,7 @@ TaskHandle_t measure_task = NULL;
 TaskHandle_t readKey_task = NULL;
 TaskHandle_t display_task = NULL;
 bool measuring = true;
-int8_t tecla;
+uint8_t tecla = 0;
 bool hold = false;
 uint8_t distance = 0;
 uint8_t key;
@@ -69,7 +69,7 @@ static void measureDistanceTask(void *pParameter){
     while(true){
         if(measuring){
             distance = HcSr04ReadDistanceInCentimeters();
-            printf("Distance: %d cm\n", distance);
+            //printf("Distance: %d cm\n", distance);
         }
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // Espera a que se notifique
     }
@@ -84,7 +84,7 @@ static void showDistanceTask(void *pParameter){
                 LedOff(LED_3);
             } else if (distance < 20){
                 LedOn(LED_1);
-                LedOn(LED_2);
+                LedOff(LED_2);
                 LedOff(LED_3);
             } else if (distance < 30){
                 LedOn(LED_1);
@@ -104,21 +104,24 @@ static void showDistanceTask(void *pParameter){
     }
 }
 
-void uartKey(){
+void uartKey(void *param){
 	while(true){
-		if (UartReadByte(UART_0, &tecla) == 0){
+		if (UartReadByte(UART_PC, &tecla)== 0){
 			switch(tecla){
-				case '79': // 'O'
+				case 'O': // 'O'
 					measuring = !measuring;
 					break;
-				case '72': // 'H'
+				case 'H': // 'H'
 					hold = !hold;
 					break;
 				default:
-				tecla = NULL;
+				tecla = 0;
 					break;
 			}
 		}
+        UartSendString(UART_PC, (char*)UartItoa(distancia,10));
+        UartSendString(UART_PC, " cm\r\n");
+
 		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 }
@@ -137,14 +140,14 @@ void functionMeasure(void* param){
 void functionDisplay(void* param){
   vTaskNotifyGiveFromISR(display_task, pdFALSE); // Notifica a la tarea de display
 }
-// void functionKey(void* param){
-//   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
-// }
+void functionKey(void* param){
+   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
+}
 /*==================[external functions definition]==========================*/
 void app_main(void){
     timer_config_t timer_measure = {
         .timer = TIMER_A,
-        .period = 1000000,
+        .period = 100000,
         .func_p = functionMeasure,
         .param_p = NULL
     };
@@ -156,7 +159,7 @@ void app_main(void){
     };	
 	serial_config_t uart_config = {
 		.baud_rate = 115200,
-		.port = UART_0,
+		.port = UART_PC,
 		.func_p = uartKey, 
 		.param_p = NULL
    };
@@ -167,7 +170,7 @@ void app_main(void){
     inicializePeripherals();
 
     xTaskCreate(&measureDistanceTask, "Measure Distance", 512, NULL, 5, &measure_task);
-  //  xTaskCreate(&readKeyTask, "Read Key", 512, NULL, 5, &readKey_task);
+    xTaskCreate(&readKeyTask, "Read Key", 512, NULL, 5, &readKey_task);
     xTaskCreate(&showDistanceTask, "Show Distance", 512, NULL, 5, &display_task);
 
     TimerStart(timer_measure.timer);
