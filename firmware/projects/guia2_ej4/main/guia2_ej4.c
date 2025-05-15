@@ -29,16 +29,16 @@
 #include <stdbool.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "analog_io_mecu.h"
+#include "analog_io_mcu.h"
 #include "timer_mcu.h" 
 #include "uart_mcu.h"
+
 /*==================[macros and definitions]=================================*/
 #define BUFFER_SIZE 231
-uint16_t poteValue = 0;
 analog_input_config_t poteInput;
-TaskHandle_t pote_task = NULL;
-TaskHandle_t output_value_task = NULL;
-TaskHandle_t input_value_task = NULL;
+TaskHandle_t adc_task_handle = NULL;
+TaskHandle_t dca_task_handle= NULL;
+
 /*==================[internal data definition]===============================*/
 const char ecg[BUFFER_SIZE] = {
     76, 77, 78, 77, 79, 86, 81, 76, 84, 93, 85, 80,
@@ -60,59 +60,62 @@ const char ecg[BUFFER_SIZE] = {
     74, 67, 71, 78, 72, 67, 73, 81, 77, 71, 75, 84, 79, 77, 77, 76, 76,
 };
 /*==================[internal functions declaration]=========================*/
-void readPoteValue(void *pParameter){
+static void readDcaValueTask(void *pParameter){
+
 	while(true){
-		AnalogInputReadSingle(CH0, &poteValue);
-		UartSendString(UART_PC, (char*)UartItoa(poteValue,10));
-		UartSendString(UART_PC, " \r\n");
+		uint16_t adcValue = 0;
+
+		AnalogInputReadSingle(CH1, &adcValue);
+		UartSendString(CH1, ">ad:");
+		UartSendString(CH1, (char*)UartItoa(adcValue,10));
+		UartSendString(CH1, " \r\n");
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	}
 }
 
-void inputEcgValue (void *pParameter){
+static void inputAdcValueTask (void *pParameter){
 	while(true){
 		for(int i = 0; i < BUFFER_SIZE; i++){
-			AnalogOutputWriteSingle(CH0, ecg[i]);
+			AnalogOutputWrite(ecg[i]);
 			ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 			}
 	}
 }
-void readPoteTask (void *pParameter){
-	vTaskNotifyGiveIndexedFromISR(pote_task, pdFALSE);
+void function_dca (void *pParameter){
+	vTaskNotifyGiveFromISR(dca_task_handle, pdFALSE);
 }
-void outputValueTask (void *pParameter){
-	vTaskNotifyGiveIndexedFromISR(output_value_task, pdFALSE);
+void function_adc (void *pParameter){
+	vTaskNotifyGiveFromISR(adc_task_handle, pdFALSE);
 }
-void inputEcgTask (void *pParameter){
-	vTaskNotifyGiveIndexedFromISR(input_value_task, pdFALSE);
-}
+
 /*==================[external functions definition]==========================*/
 void app_main(void){
-	timer_config_t timer_output = {
+	timer_config_t timer_adc = {
         .timer = TIMER_A,
         .period = 4000,
-        .func_p = readPoteTask,
+        .func_p = adc_task_handle,
         .param_p = NULL
     };
-    timer_config_t timer_input = {
+    timer_config_t timer_dca = {
         .timer = TIMER_B,
         .period = 2000,
-        .func_p = outputValueTask,
+        .func_p = dca_task_handle,
         .param_p = NULL
     };	
 	serial_config_t uart_config = {
 		.baud_rate = 115200,
 		.port = UART_PC,
-		.func_p = uartKey, 
+		.func_p = NULL, 
 		.param_p = NULL
    };
+
    UartInit(&uart_config);
-   TimerInit(&timer_output);
-   TimerInit(&timer_input);
+   TimerInit(&timer_adc);
+   TimerInit(&timer_dca);
    AnalogInputInit(&poteInput);
    AnalogOutputInit();
-   xTaskCreate(readPoteValue, "readPoteValue", 2048, NULL, 1, &pote_task);
-   xTaskCreate(inputEcgValue, "inputEcgValue", 2048, NULL, 1, &output_value_task);
-   xTaskCreate(outputValueTask, "outputValueTask", 2048, NULL, 1, &output_value_task);
+   xTaskCreate(&readDcaValueTask, "readDcaValue", 2048, NULL, 1, &adc_task_handle);
+   xTaskCreate(&inputAdcValueTask, "inputAdcValue", 2048, NULL, 1, &dca_task_handle);
+
 }
 /*==================[end of file]============================================*/
