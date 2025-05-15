@@ -71,13 +71,14 @@ static void measureDistanceTask(void *pParameter){
             distance = HcSr04ReadDistanceInCentimeters();
             //printf("Distance: %d cm\n", distance);
         }
+
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // Espera a que se notifique
     }
 }
 
 static void showDistanceTask(void *pParameter){
     while(true){
-        if (measuring) {
+        if (measuring && !hold) {
             if (distance < 10){
                 LedOff(LED_1);
                 LedOff(LED_2);
@@ -100,6 +101,10 @@ static void showDistanceTask(void *pParameter){
         if(!hold){ // si hold = false, escribo en el display
             LcdItsE0803Write(distance);
         }
+        else{
+            LcdItsE0803Off();
+            LedsOffAll();
+        }
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
     }
 }
@@ -119,7 +124,7 @@ void uartKey(void *param){
 					break;
 			}
 		}
-        UartSendString(UART_PC, (char*)UartItoa(distancia,10));
+        UartSendString(UART_PC, (char*)UartItoa(distance,10));
         UartSendString(UART_PC, " cm\r\n");
 
 		vTaskDelay(10 / portTICK_PERIOD_MS);

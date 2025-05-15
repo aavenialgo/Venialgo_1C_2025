@@ -48,19 +48,13 @@ int8_t tecla;
 bool hold = false;
 uint8_t distance = 0;
 /*==================[internal functions declaration]=========================*/
-static void readKeyTask(void *pParameter){
-    while(true){
-    
-    switch( SwitchesRead() ){
-        case SWITCH_1:
-        measuring = !measuring;
-        break;
-        case SWITCH_2:
-        hold = !hold;
-        break;
-    }
-    ulTaskNotifyTake(pdTRUE, portMAX_DELAY); 
-    }
+
+
+static void functionKey1(void* param){
+    measuring = !measuring;
+}
+static void functionKey2(void* param){
+    hold = !hold;
 }
 
 static void measureDistanceTask(void *pParameter){
@@ -95,9 +89,11 @@ static void showDistanceTask(void *pParameter){
                 LedOn(LED_3);
             }
         }
+
         if(!hold){ // si hold = false, escribo en el display
             LcdItsE0803Write(distance);
         }
+    
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
     }
 }
@@ -106,8 +102,9 @@ void inicializePeripherals(){
     LcdItsE0803Init();
     HcSr04Init(GPIO_3, GPIO_2); 
     SwitchesInit();
+    SwitchActivInt(SWITCH_1, functionKey1, NULL);
+    SwitchActivInt(SWITCH_2, functionKey2, NULL);
     LedsInit();
-
 }
 
 void functionMeasure(void* param){
@@ -140,7 +137,7 @@ void app_main(void){
     inicializePeripherals();
 
     xTaskCreate(&measureDistanceTask, "Measure Distance", 2048, NULL, 5, &measure_task);
-    xTaskCreate(&readKeyTask, "Read Key", 2048, NULL, 5, &readKey_task);
+   // xTaskCreate(&readKeyTask, "Read Key", 2048, NULL, 5, &readKey_task);
     xTaskCreate(&showDistanceTask, "Show Distance", 512, NULL, 5, &display_task);
 
     TimerStart(timer_measure.timer);

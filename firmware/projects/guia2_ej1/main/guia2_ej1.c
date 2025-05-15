@@ -63,7 +63,7 @@ static void measureDistanceTask(void *pParameter){
     while(true){
         if(measuring){
             distance = HcSr04ReadDistanceInCentimeters();
-            printf("Distance: %d cm\n", distance);
+            //printf("Distance: %d cm\n", distance);
         }
         vTaskDelay(CONFIG_MEASURE_PERIOD / portTICK_PERIOD_MS);
     }
