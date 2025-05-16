@@ -66,9 +66,9 @@ static void readDcaValueTask(void *pParameter){
 		uint16_t adcValue = 0;
 
 		AnalogInputReadSingle(CH1, &adcValue);
-		UartSendString(CH1, ">ad:");
-		UartSendString(CH1, (char*)UartItoa(adcValue,10));
-		UartSendString(CH1, " \r\n");
+		UartSendString(CH0, ">ad:");
+		UartSendString(CH0, (char*)UartItoa(adcValue,10));
+		UartSendString(CH0, " \r\n");
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	}
 }
@@ -93,13 +93,13 @@ void app_main(void){
 	timer_config_t timer_adc = {
         .timer = TIMER_A,
         .period = 4000,
-        .func_p = adc_task_handle,
+        .func_p = function_adc,
         .param_p = NULL
     };
     timer_config_t timer_dca = {
         .timer = TIMER_B,
         .period = 2000,
-        .func_p = dca_task_handle,
+        .func_p = function_dca,
         .param_p = NULL
     };	
 	serial_config_t uart_config = {
