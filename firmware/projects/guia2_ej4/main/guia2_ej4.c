@@ -1,10 +1,12 @@
 /*! @mainpage Template
  *
  * @section genDesc General Description
- *
- * This section describes how the program works.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * Diseñar e implementar una aplicación, basada en el driver analog io mcu.y 
+ * el driver de transmisión serie uart mcu.h, que digitalice una señal analógica 
+ * y la transmita a un graficador de puerto serie de la PC. Se debe tomar la 
+ * entrada CH1 del conversor AD y la transmisión se debe realizar por la UART 
+ * conectada al puerto serie de la PC, en un formato compatible con un graficador 
+ * por puerto serie. 
  *
  * @section hardConn Hardware Connection
  *
@@ -34,8 +36,14 @@
 #include "uart_mcu.h"
 
 /*==================[macros and definitions]=================================*/
+/* @brief Tamaño del buffer de datos a enviar por UART. 
+*/
 #define BUFFER_SIZE 231
-analog_input_config_t poteInput;
+/*
+*/
+analog_input_config_t poteInput{
+    .channel = CH1, 
+}
 TaskHandle_t adc_task_handle = NULL;
 TaskHandle_t dca_task_handle= NULL;
 
@@ -114,6 +122,7 @@ void app_main(void){
    TimerInit(&timer_dca);
    AnalogInputInit(&poteInput);
    AnalogOutputInit();
+   
    xTaskCreate(&readDcaValueTask, "readDcaValue", 2048, NULL, 1, &adc_task_handle);
    xTaskCreate(&inputAdcValueTask, "inputAdcValue", 2048, NULL, 1, &dca_task_handle);
 

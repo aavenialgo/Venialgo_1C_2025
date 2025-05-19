@@ -8,9 +8,15 @@
  *
  * @section hardConn Hardware Connection
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * |    Peripheral      |   ESP32 GPIO    |
+ * |:------------------:|:---------------:|
+ * | Ultrasonic Trigger | GPIO_3          |
+ * | Ultrasonic Echo    | GPIO_2          |
+ * | Button 1           | GPIO_4          |
+ * | Button 2           | GPIO_15         |
+ * | LED 1              | GPIO_11         |
+ * | LED 2              | GPIO_10         |
+ * | LED 3              | GPIO_5          |
  *
  *
  * @section changelog Changelog
@@ -38,25 +44,56 @@
 #define CONFIG_MEASURE_PERIOD 1000
 #define CONFIG_DISPLAY_PERIOD 1000
 /*==================[internal data definition]===============================*/
-
-
+/**
+ * @brief Handle de la tarea de medición de distancia.
+ */
 TaskHandle_t measure_task = NULL;
+/**
+ * @brief Handle de la tarea de lectura de teclas.
+ */
 TaskHandle_t readKey_task = NULL;
+/**
+ * @brief Handle de la tarea de visualización de distancia.
+ */
 TaskHandle_t display_task = NULL;
+/**
+ * @brief Variable que indica si se está midiendo o no.
+ */
 bool measuring = true;
+/**
+ * @brief Variable que almacena la tecla leída.
+ */
 int8_t tecla;
+/**
+ * @brief Indica si el display está en modo "hold".
+ */
 bool hold = false;
+/**
+ * @brief Variable que almacena la distancia medida.
+ */
 uint8_t distance = 0;
 /*==================[internal functions declaration]=========================*/
 
-
+/**
+ * @brief Funcion asociada a la interrupcion del switch 1.
+ * 
+ * @param pParameter Puntero a parametros (no utilizado).
+ */
 static void functionKey1(void* param){
     measuring = !measuring;
 }
+/**
+ * @brief Funcion asociada a la interrupcion del switch 2.
+ * 
+ * @param pParameter Puntero a parametros (no utilizado).
+ */
 static void functionKey2(void* param){
     hold = !hold;
 }
-
+/**
+ * @brief Tarea que mide la distancia usando el sensor HC_SR04 y lo almacen
+ * en la varible distance en centimetros.
+ */
 static void measureDistanceTask(void *pParameter){
     while(true){
         if(measuring){
@@ -66,7 +103,10 @@ static void measureDistanceTask(void *pParameter){
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // Espera a que se notifique
     }
 }
-
+/* 
+* @bref Tarea que lee la variable distance, enciende los leds segun corresponda y
+* escribe en el display de acuerdo al estado de hold.
+*/
 static void showDistanceTask(void *pParameter){
     while(true){
         if (measuring) {

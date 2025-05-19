@@ -2,13 +2,27 @@
  *
  * @section genDesc General Description
  *
- * This section describes how the program works.
- *
+ * 1. Diseñar un firmware que cumpla las siguientes funcionalidades:
+ * a. si la distancia es menor a 10 cm, apagar todos los LEDs.
+ * b. si la distancia esta entre 10, y 20 cm, enceender el LED_1.
+ * c. Si la distancia está entre 20 y 30 cm, encender el LED_2 y LED_1.
+ * d. Si la distancia es mayor a 30 cm, encender el LED_3, LED_2 y LED_1.
+ * 2. Mostrar el valor de distancia en cm utilizando el display LCD.
+ * 3. Usar TEC1 para activar y detener la medición.
+ * 4. Usar TEC2 para mantener el resultado (“HOLD”).
+ * 5. Refresco de medición: 1 s.
+ * 
  * @section hardConn Hardware Connection
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * |    Peripheral      |   ESP32 GPIO    |
+ * |:------------------:|:---------------:|
+ * | Ultrasonic Trigger | GPIO_3          |
+ * | Ultrasonic Echo    | GPIO_2          |
+ * | Button 1           | GPIO_4          |
+ * | Button 2           | GPIO_15         |
+ * | LED 1              | GPIO_11         |
+ * | LED 2              | GPIO_10         |
+ * | LED 3              | GPIO_5          |
  *
  *
  * @section changelog Changelog
@@ -43,6 +57,7 @@ int8_t tecla;
 bool hold = false;
 uint8_t distance = 0;
 /*==================[internal functions declaration]=========================*/
+
 static void readKeyTask(void *pParameter){
     while(true){
     
@@ -54,7 +69,7 @@ static void readKeyTask(void *pParameter){
         hold = !hold;
         break;
     }
-    vTaskDelay(100 / portTICK_PERIOD_MS);
+    vTaskDelay(200 / portTICK_PERIOD_MS);
     
     }
 }
