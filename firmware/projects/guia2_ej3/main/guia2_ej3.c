@@ -1,16 +1,26 @@
 /*! @mainpage Template
  *
  * @section genDesc General Description
- *
- * This section describes how the program works.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
- *
+ * Cree un nuevo proyecto en el que modifique la actividad del punto 2 
+ * agregando ahora el puerto serie. Envíe los datos de las mediciones 
+ * para poder observarlos en un terminal en la PC, siguiendo el siguiente formato:
+ * 3 dígitos ascii + 1 carácter espacio + dos caracteres para la unidad (cm) + 
+ * cambio de línea “ \r\n”
+ * Además debe ser posible controlar la EDU-ESP de la siguiente manera:
+ * Con las teclas “O” y “H”, replicar la funcionalidad de las teclas 1 y 2 de la EDU-ESP
+ * 
+ * 
  * @section hardConn Hardware Connection
  *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * |    Peripheral      |   ESP32 GPIO    |
+ * |:------------------:|:---------------:|
+ * | Ultrasonic Trigger | GPIO_3          |
+ * | Ultrasonic Echo    | GPIO_2          |
+ * | Button 1           | GPIO_4          |
+ * | Button 2           | GPIO_15         |
+ * | LED 1              | GPIO_11         |
+ * | LED 2              | GPIO_10         |
+ * | LED 3              | GPIO_5          |
  *
  *
  * @section changelog Changelog
@@ -39,31 +49,53 @@
 #define CONFIG_MEASURE_PERIOD 1000
 #define CONFIG_DISPLAY_PERIOD 1000
 /*==================[internal data definition]===============================*/
-
-
+/**
+ * @brief Handle de la tarea de medicion de distancia.
+ */
 TaskHandle_t measure_task = NULL;
+/**
+ * @brief Handle de la tarea de lectura de teclas.
+ */
 TaskHandle_t readKey_task = NULL;
+/**
+ * @brief Handle de la tarea de visualizacion de distancia.
+ */
 TaskHandle_t display_task = NULL;
+/**
+ * @brief bandera que indica si se esta midiendo o no.
+ */
 bool measuring = true;
-uint8_t tecla = 0;
+/**
+ * @brief Variable que almacena la tecla leída.
+ */
+uint8_t key = 0;
+/**
+ * @brief Variable que indica si se esta en modo hold o no.
+ */
 bool hold = false;
+/** 
+* @brief Variable que almacena la distancia medida.
+*/
 uint8_t distance = 0;
-uint8_t key;
+
 /*==================[internal functions declaration]=========================*/
-static void readKeyTask(void *pParameter){
-    while(true){
-    
-    switch( SwitchesRead() ){
-        case SWITCH_1:
-        measuring = !measuring;
-        break;
-        case SWITCH_2:
-        hold = !hold;
-        break;
-    }
-    ulTaskNotifyTake(pdTRUE, portMAX_DELAY); 
-    }
+/**
+ * @brief Funcion asociada a la interrupcion del switch 1.
+ * 
+ * @param pParameter Puntero a parametros (no utilizado).
+ */
+static void functionKey1(void* param){
+    measuring = !measuring;
 }
+/**
+ * @brief Funcion asociada a la interrupcion del switch 2.
+ * 
+ * @param pParameter Puntero a parametros (no utilizado).
+ */
+static void functionKey2(void* param){
+    hold = !hold;
+}
+
 
 static void measureDistanceTask(void *pParameter){
     while(true){
@@ -111,8 +143,8 @@ static void showDistanceTask(void *pParameter){
 
 void uartKey(void *param){
 	while(true){
-		if (UartReadByte(UART_PC, &tecla)== 0){
-			switch(tecla){
+		if (UartReadByte(UART_PC, &key)== 0){
+			switch(key){
 				case 'O': // 'O'
 					measuring = !measuring;
 					break;
@@ -120,7 +152,7 @@ void uartKey(void *param){
 					hold = !hold;
 					break;
 				default:
-				tecla = 0;
+				key = 0;
 					break;
 			}
 		}
@@ -135,8 +167,9 @@ void inicializePeripherals(){
     LcdItsE0803Init();
     HcSr04Init(GPIO_3, GPIO_2); 
     SwitchesInit();
+    SwitchActivInt(SWITCH_1, functionKey1, NULL);
+    SwitchActivInt(SWITCH_2, functionKey2, NULL);
     LedsInit();
-
 }
 
 void functionMeasure(void* param){

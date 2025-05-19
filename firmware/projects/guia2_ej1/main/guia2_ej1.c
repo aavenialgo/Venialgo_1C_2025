@@ -41,23 +41,51 @@
 #include <stdbool.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "hc_sr04n.h"
+#include "hc_sr04.h"
 #include "lcditse0803.h"
 #include "led.h"
 #include "switch.h"
 /*==================[macros and definitions]=================================*/
+/**  @brief periodo de refresco de la medicion en milisegundos. 
+*/
 #define CONFIG_MEASURE_PERIOD 1000
+/**  @brief periodo de refresco de la visualizacion en milisegundos. 
+*/
 #define CONFIG_DISPLAY_PERIOD 1000
 /*==================[internal data definition]===============================*/
+/**
+ * @brief Handle de la tarea de medición de distancia.
+ */
 TaskHandle_t measure_task = NULL;
+/**
+ * @brief Handle de la tarea de lectura de teclas.
+ */
 TaskHandle_t readKey_task = NULL;
+/**
+ * @brief Handle de la tarea de visualización de distancia.
+ */
 TaskHandle_t display_task = NULL;
+/**
+ * @brief Variable que indica si se está midiendo o no.
+ */
 bool measuring = true;
-int8_t tecla;
+/**
+ * @brief Variable que almacena la tecla leída.
+ */
+int8_t tecla = 0;
+/**
+ * @brief Indica si el display está en modo "hold".
+ */
 bool hold = false;
+/**
+ * @brief Variable que almacena la distancia medida.
+ */
 uint8_t distance = 0;
 /*==================[internal functions declaration]=========================*/
-
+/**
+ * @brief Tarea que lee el estado de los switches y cambia el estado de las variables
+ * hold y measuring.
+ */
 static void readKeyTask(void *pParameter){
     while(true){
     
@@ -73,7 +101,10 @@ static void readKeyTask(void *pParameter){
     
     }
 }
-
+/**
+ * @brief Tarea que mide la distancia usando el sensor HC_SR04 y lo almacen
+ * en la varible distance en centimetros.
+ */
 static void measureDistanceTask(void *pParameter){
     while(true){
         if(measuring){
@@ -83,7 +114,10 @@ static void measureDistanceTask(void *pParameter){
         vTaskDelay(CONFIG_MEASURE_PERIOD / portTICK_PERIOD_MS);
     }
 }
-
+/**  
+* @brief Tarea que lee la variable distance, enciende los leds segun corresponda y
+* escribe en el display de acuerdo al estado de hold.
+*/
 static void showDistanceTask(void *pParameter){
     while(true){
         if (measuring) {

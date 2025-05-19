@@ -63,7 +63,7 @@ bool measuring = true;
 /**
  * @brief Variable que almacena la tecla leída.
  */
-int8_t tecla;
+int8_t tecla = 0;
 /**
  * @brief Indica si el display está en modo "hold".
  */
@@ -103,8 +103,8 @@ static void measureDistanceTask(void *pParameter){
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // Espera a que se notifique
     }
 }
-/* 
-* @bref Tarea que lee la variable distance, enciende los leds segun corresponda y
+/**  
+* @brief Tarea que lee la variable distance, enciende los leds segun corresponda y
 * escribe en el display de acuerdo al estado de hold.
 */
 static void showDistanceTask(void *pParameter){
@@ -137,7 +137,9 @@ static void showDistanceTask(void *pParameter){
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
     }
 }
-
+/**
+ * @brief Inicializa los perifericos utilizados en el proyecto.
+ */
 void inicializePeripherals(){
     LcdItsE0803Init();
     HcSr04Init(GPIO_3, GPIO_2); 

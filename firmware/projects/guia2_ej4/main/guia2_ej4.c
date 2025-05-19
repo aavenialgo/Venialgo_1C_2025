@@ -21,7 +21,7 @@
  * |:----------:|:-----------------------------------------------|
  * | 15/05/2025 | Document creation		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Andres Venialgo
  *
  */
 
@@ -36,14 +36,14 @@
 #include "uart_mcu.h"
 
 /*==================[macros and definitions]=================================*/
-/* @brief Tamaño del buffer de datos a enviar por UART. 
+/** 
+ * @brief Tamaño del buffer de datos a enviar por UART. 
 */
 #define BUFFER_SIZE 231
-/*
-*/
-analog_input_config_t poteInput{
-    .channel = CH1, 
-}
+
+analog_input_config_t poteInput = {
+    .input = CH1, 
+};
 TaskHandle_t adc_task_handle = NULL;
 TaskHandle_t dca_task_handle= NULL;
 
@@ -68,20 +68,20 @@ const char ecg[BUFFER_SIZE] = {
     74, 67, 71, 78, 72, 67, 73, 81, 77, 71, 75, 84, 79, 77, 77, 76, 76,
 };
 /*==================[internal functions declaration]=========================*/
-static void readDcaValueTask(void *pParameter){
+static void readAdcValueTask(void *pParameter){
 
 	while(true){
 		uint16_t adcValue = 0;
 
-		AnalogInputReadSingle(CH1, &adcValue);
-		UartSendString(CH0, ">ad:");
-		UartSendString(CH0, (char*)UartItoa(adcValue,10));
-		UartSendString(CH0, " \r\n");
+		AnalogInputReadSingle(poteInput.input, &adcValue);
+		UartSendString(UART_PC, ">ad:");
+		UartSendString(UART_PC, (char*)UartItoa(adcValue,10));
+		UartSendString(UART_PC, " \r\n");
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	}
 }
 
-static void inputAdcValueTask (void *pParameter){
+static void outputDacValueTask (void *pParameter){
 	while(true){
 		for(int i = 0; i < BUFFER_SIZE; i++){
 			AnalogOutputWrite(ecg[i]);
@@ -122,9 +122,11 @@ void app_main(void){
    TimerInit(&timer_dca);
    AnalogInputInit(&poteInput);
    AnalogOutputInit();
-   
-   xTaskCreate(&readDcaValueTask, "readDcaValue", 2048, NULL, 1, &adc_task_handle);
-   xTaskCreate(&inputAdcValueTask, "inputAdcValue", 2048, NULL, 1, &dca_task_handle);
 
+   xTaskCreate(&readAdcValueTask, "readDcaValue", 2048, NULL, 1, &adc_task_handle);
+   xTaskCreate(&outputDacValueTask, "inputAdcValue", 2048, NULL, 1, &dca_task_handle);
+
+    TimerStart(TIMER_A); 
+    TimerStart(TIMER_B);
 }
 /*==================[end of file]============================================*/
