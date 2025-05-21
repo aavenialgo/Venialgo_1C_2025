@@ -40,14 +40,26 @@
  * @brief Tamaño del buffer de datos a enviar por UART. 
 */
 #define BUFFER_SIZE 231
-
+/** 
+ * @brief Configuración del canal ADC para leer el valor analógico.
+ */
 analog_input_config_t poteInput = {
     .input = CH1, 
 };
+/** 
+ * @brief Handle para la tarea de lectura del ADC.
+ */
 TaskHandle_t adc_task_handle = NULL;
+/** 
+ * @brief Handle para la tarea de salida del DAC.
+ */
 TaskHandle_t dca_task_handle= NULL;
 
 /*==================[internal data definition]===============================*/
+/**
+ * @brief Buffer de datos a enviar por UART.
+ * @note Este buffer contiene una señal ECG simulada.
+ */
 const char ecg[BUFFER_SIZE] = {
     76, 77, 78, 77, 79, 86, 81, 76, 84, 93, 85, 80,
     89, 95, 89, 85, 93, 98, 94, 88, 98, 105, 96, 91,
@@ -68,6 +80,10 @@ const char ecg[BUFFER_SIZE] = {
     74, 67, 71, 78, 72, 67, 73, 81, 77, 71, 75, 84, 79, 77, 77, 76, 76,
 };
 /*==================[internal functions declaration]=========================*/
+/**
+ * @brief Tarea que lee el valor del ADC y lo envía por UART.
+ * @param pParameter Parámetro de entrada (no utilizado).
+ */
 static void readAdcValueTask(void *pParameter){
 
 	while(true){
@@ -80,7 +96,14 @@ static void readAdcValueTask(void *pParameter){
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	}
 }
-
+/**
+ * @brief Tarea que envía valores predefinidos al DAC.
+ * 
+ * Esta tarea recorre el buffer ecg y envía los valores al DAC para generar
+ * una señal analógica.
+ * 
+ * @param pParameter Parámetro de entrada (no utilizado).
+ */
 static void outputDacValueTask (void *pParameter){
 	while(true){
 		for(int i = 0; i < BUFFER_SIZE; i++){
@@ -89,14 +112,34 @@ static void outputDacValueTask (void *pParameter){
 			}
 	}
 }
+/**
+ * @brief Función asociada al temporizador del DAC.
+ * 
+ * Notifica a la tarea de salida del DAC que debe ejecutarse.
+ * 
+ * @param pParameter Parámetro de entrada (no utilizado).
+ */
 void function_dca (void *pParameter){
 	vTaskNotifyGiveFromISR(dca_task_handle, pdFALSE);
 }
+/**
+ * @brief Función asociada al temporizador del ADC.
+ * 
+ * Notifica a la tarea de lectura del ADC que debe ejecutarse.
+ * 
+ * @param pParameter Parámetro de entrada (no utilizado).
+ */
 void function_adc (void *pParameter){
 	vTaskNotifyGiveFromISR(adc_task_handle, pdFALSE);
 }
 
 /*==================[external functions definition]==========================*/
+/**
+ * @brief Función principal del programa.
+ * 
+ * Configura los periféricos, inicializa los temporizadores y crea las tareas
+ * necesarias para la lectura del ADC y la salida del DAC.
+ */
 void app_main(void){
 	timer_config_t timer_adc = {
         .timer = TIMER_A,

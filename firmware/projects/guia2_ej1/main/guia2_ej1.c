@@ -148,6 +148,12 @@ static void showDistanceTask(void *pParameter){
 }
 
 /*==================[external functions definition]==========================*/
+/**
+ * @brief Función principal del programa.
+ * 
+ * Inicializa el LCD, los Leds, el sensor HC_SR04 y los switches. Luego crea las tareas
+ * para medir la distancia, leer las teclas y mostrar la distancia en el LCD.
+ */
 void app_main(void){
     LcdItsE0803Init();
     HcSr04Init(GPIO_3, GPIO_2); //Ver cual conectar

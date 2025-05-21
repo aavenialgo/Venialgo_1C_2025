@@ -91,7 +91,7 @@ static void functionKey2(void* param){
     hold = !hold;
 }
 /**
- * @brief Tarea que mide la distancia usando el sensor HC_SR04 y lo almacen
+ * @brief Tarea que mide la distancia usando el sensor HC_SR04 y lo almacena
  * en la varible distance en centimetros.
  */
 static void measureDistanceTask(void *pParameter){
@@ -148,15 +148,23 @@ void inicializePeripherals(){
     SwitchActivInt(SWITCH_2, functionKey2, NULL);
     LedsInit();
 }
-
+/**
+ * @brief Notifica a la tarea de medir distancia que debe ejecutarse.
+ */
 void functionMeasure(void* param){
-  vTaskNotifyGiveFromISR(measure_task, pdFALSE); // Notifica a la tarea de medida
+  vTaskNotifyGiveFromISR(measure_task, pdFALSE);
 }
+/**
+ * @brief Notifica a la tarea de mostrar distancia que debe ejecutarse.
+ */
 void functionDisplay(void* param){
-  vTaskNotifyGiveFromISR(display_task, pdFALSE); // Notifica a la tarea de display
+  vTaskNotifyGiveFromISR(display_task, pdFALSE); 
 }
+/**
+ * @brief Notifica a la tarea de lectura de teclas que debe ejecutarse.
+ */
 void functionKey(void* param){
-   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
+   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); 
  }
 /*==================[external functions definition]==========================*/
 void app_main(void){

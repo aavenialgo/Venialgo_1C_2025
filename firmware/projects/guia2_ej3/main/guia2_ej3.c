@@ -95,8 +95,10 @@ static void functionKey1(void* param){
 static void functionKey2(void* param){
     hold = !hold;
 }
-
-
+/**
+ * @brief Tarea que mide la distancia usando el sensor HC_SR04 y lo almacena
+ * en la varible distance en centimetros.
+ */
 static void measureDistanceTask(void *pParameter){
     while(true){
         if(measuring){
@@ -107,7 +109,10 @@ static void measureDistanceTask(void *pParameter){
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // Espera a que se notifique
     }
 }
-
+/**  
+* @brief Tarea que lee la variable distance, enciende los leds segun corresponda y
+* escribe en el display de acuerdo al estado de hold.
+*/
 static void showDistanceTask(void *pParameter){
     while(true){
         if (measuring && !hold) {
@@ -140,7 +145,12 @@ static void showDistanceTask(void *pParameter){
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
     }
 }
-
+/**
+ * @brief Tarea que lee el valor de la tecla y lo almacena en la variable key.
+ *  Realiza la misma tarea que la funcion asociada a la interrupcion del switch 1 y 2.
+ * Luego escribe el valor de la distancia por UART.
+ * @param param Puntero a parametros (no utilizado).
+ */
 void uartKey(void *param){
 	while(true){
 		if (UartReadByte(UART_PC, &key)== 0){
@@ -162,7 +172,9 @@ void uartKey(void *param){
 		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 }
-
+/**
+ * @brief Inicializa los perifericos utilizados en el proyecto.
+ */
 void inicializePeripherals(){
     LcdItsE0803Init();
     HcSr04Init(GPIO_3, GPIO_2); 
@@ -171,15 +183,23 @@ void inicializePeripherals(){
     SwitchActivInt(SWITCH_2, functionKey2, NULL);
     LedsInit();
 }
-
+/**
+ * @brief Notifica a la tarea de medir distancia que debe ejecutarse.
+ */
 void functionMeasure(void* param){
-  vTaskNotifyGiveFromISR(measure_task, pdFALSE); // Notifica a la tarea de medida
+  vTaskNotifyGiveFromISR(measure_task, pdFALSE); 
 }
+/**
+ * @brief Notifica a la tarea de mostrar distancia que debe ejecutarse.
+ */
 void functionDisplay(void* param){
-  vTaskNotifyGiveFromISR(display_task, pdFALSE); // Notifica a la tarea de display
+  vTaskNotifyGiveFromISR(display_task, pdFALSE); 
 }
+/**
+ * @brief Notifica a la tarea de lectura de tecla que debe ejecutarse.
+ */
 void functionKey(void* param){
-   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); // Notifica a la tarea de lectura de tecla
+   vTaskNotifyGiveFromISR(readKey_task, pdFALSE); 
 }
 /*==================[external functions definition]==========================*/
 void app_main(void){
