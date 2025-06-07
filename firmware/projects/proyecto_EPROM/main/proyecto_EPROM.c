@@ -232,7 +232,6 @@ void app_main(void){
 	AnalogInputInit(&analog_input);
 	AnalogOutputInit();
 
-
 	// Create the task for filtering data
 	xTaskCreate(procesar_enviar, "leo y envio datos", 2048, NULL, 5, &task_handle);
 

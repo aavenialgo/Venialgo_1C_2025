@@ -33,7 +33,6 @@
 #include "iir_filter.h"
 #include "ble_mcu.h"
 #include "analog_io_mcu.h"
-#include "timer_mcu.h"
 
 /*==================[macros and definitions]=================================*/
 #define CONFIG_BLINK_PERIOD 500
@@ -100,12 +99,14 @@ void inicialitePeripherals(){
 		"ESP_WAR_MACHINE)",
 		BLE_NO_INT };
 	BleInit(&ble_configuration);
-		timer_config_t timer_senial = {
-        .timer = TIMER_B,
-        .period = T_SENIAL*CHUNK,
-        .func_p = FuncTimerSenialECG,
-        .param_p = NULL
-    };
+
+	timer_config_t timer_senial = {
+	.timer = TIMER_B,
+	.period = T_SENIAL*CHUNK,
+	.func_p = FuncTimerSenialECG,
+	.param_p = NULL
+	};
+	
 	TimerInit(&timer_senial);
     TimerStart(timer_senial.timer);
 
