@@ -50,6 +50,12 @@
         },
         {
             "path": "middelware"
+        },
+        {
+            "path": "projects/prueba_ppg"
+        },
+        {
+            "path": "projects/prueba_ecg"
         }
     ],
     "settings": {

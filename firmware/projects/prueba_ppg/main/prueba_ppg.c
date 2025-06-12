@@ -23,6 +23,7 @@
 /*==================[inclusions]=============================================*/
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 #include <stdbool.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
@@ -31,7 +32,6 @@
 #include "max3010x.h"
 #include "led.h"
 #include "timer_mcu.h"
-#include "iir_filter.h"
 #include "ble_mcu.h"
 #include "analog_io_mcu.h"
 /*==================[macros and definitions]=================================*/
@@ -55,7 +55,7 @@ int8_t validHeartRate; //indicator to show if the heart rate calculation is vali
 void processAndSend(void *pvParamenter){
 	char msg[60];
 	char msg_aux[60];
-	float red_val;
+	//float red_val;
 	while(1){
         uint8_t i;
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
