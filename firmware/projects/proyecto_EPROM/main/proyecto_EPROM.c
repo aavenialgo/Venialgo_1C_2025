@@ -39,8 +39,8 @@
 #include "iir_filter.h"
 #include "ble_mcu.h"
 #include "analog_io_mcu.h"
-#include "timer_mcu.h"
-
+#include "uart_mcu.h"
+#include "neopixel_stripe.h"
 
 //#include "spo2_algorithm.h"
 //#include <max3010x.h>
@@ -67,8 +67,8 @@ static float ecg_muestra[CHUNK] = {0};
 bool filter = false;
 TaskHandle_t task_handle_ecg = NULL;
 
-analog_input_config_t poteInput = {  //senial ppg
-    .input = CH1, 
+analog_input_config_t poteInput = {  //senial
+    .input = CH2, 
 };
 TaskHandle_t task_handle_ppg = NULL;
 
@@ -85,7 +85,7 @@ static void processAndSendEcg(void *pvParameter)
 	while (1)
 	{
 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		AnalogInputReadSingle(CH1, &valor);
+		AnalogInputReadSingle(CH2, &valor);
 		ecg_muestra[i] = valor;
 		valor_actual = valor;
 		i++;
@@ -107,34 +107,66 @@ static void processAndSendEcg(void *pvParameter)
 	}
 }
 void procesAndSendPpg(void *pvParameter)
-{	
-	while(true){
-		uint16_t adcValue = 0;
+{	 char msg[32];
+    float analog_raw, analog_hp, analog_filt;
+    uint16_t adcValue = 0;
+    while(true){
+        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 
-		AnalogInputReadSingle(poteInput.input, &adcValue);
-		BleSendByte((char*)UartItoa(adcValue,10));
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-	}
+        AnalogInputReadSingle(poteInput.input, &adcValue);
+        analog_raw = (float)adcValue;
+
+        HiPassFilter(&analog_raw, &analog_hp, 1);
+        LowPassFilter(&analog_hp, &analog_filt, 1);
+        snprintf(msg, sizeof(msg), "%0.2f\n", analog_filt);
+		printf(">PPG:%0.2f\r\n", analog_filt);		
+		
+		//BleSendString(msg);
+
+		// Enviar el valor del ADC por UART
+ 		// UartSendString(CH1, ">ad:");
+ 		// UartSendString(CH1, (char*)UartItoa(adcValue,10));
+ 		// UartSendString(CH1, " \r\n");
+		// UartSendString(CH1, ">ad:");
+ 		// UartSendString(CH1, (char*)UartItoa(adcValue,10));
+ 		// UartSendString(CH1, " \r\n");
+        //BleSendString(msg);
+    }
 }
+
+// void processAndSendPpg(void *pvParameter)
+// {	while(true){
+// 		uint16_t adcValue = 0;
+// 		AnalogInputReadSingle(poteInput.input, &adcValue);
+// 		UartSendString(CH1, ">ad:");
+// 		UartSendString(CH1, (char*)UartItoa(adcValue,10));
+// 		UartSendString(CH1, " \r\n");
+// 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+// 	}
+// }
 
 void FuncTimerSenialECG(void* param){
     xTaskNotifyGive(task_handle_ecg);
 }
+
 void FuncTimerSenialPPG(void* param){
     xTaskNotifyGive(task_handle_ppg);
 }
+
 void inicialitePeripherals(){
 	LedsInit();
-	LowPassInit(SAMPLE_FREQ, 30, ORDER_2);
-    HiPassInit(SAMPLE_FREQ, 1, ORDER_2);
+	LedOn(LED_3);
+	LowPassInit(SAMPLE_FREQ, 20, ORDER_2);
+    HiPassInit(SAMPLE_FREQ, 0.5, ORDER_2);
+
 	ble_config_t ble_configuration = {
-		"ESP_WAR_MACHINE)",
+		"ESP_WAR_MACHINE_ppg",
 		BLE_NO_INT };
 	BleInit(&ble_configuration);
 
 	timer_config_t timer_ecg = {
 	.timer = TIMER_B,
-	.period = T_SENIAL*CHUNK,
+	.period = T_SENIAL,
 	.func_p = FuncTimerSenialECG,
 	.param_p = NULL
 	};
@@ -144,37 +176,49 @@ void inicialitePeripherals(){
 	.period = 4000,
 	.func_p = FuncTimerSenialPPG,
 	.param_p = NULL
-	}
+	};
+
 	TimerInit(&timer_ppg);
-	TimerInit(&timer_ecg);
-    TimerStart(timer_ecg.timer);
 	TimerStart(timer_ppg.timer);
+	//TimerInit(&timer_ecg);
+    //TimerStart(timer_ecg.timer);
 
 	AnalogInputInit(&poteInput);
 	AnalogOutputInit();
+
+	serial_config_t uart_config = {
+		.baud_rate = 115200,
+		.port = CH1,
+		.func_p = NULL, 
+		.param_p = NULL
+   };
+
+   UartInit(&uart_config);
+	UartSendString(CH1, ">ad: configuracion de perifericos\r\n");
+
 
 }
 /*==================[external functions definition]==========================*/
 void app_main(void){
 
 	inicialitePeripherals();
-	xTaskCreate(processAndSendEcg, "Leo y envio datos ECG", 2048, NULL, 5, &task_handle_ecg);
+
+//	xTaskCreate(processAndSendEcg, "Leo y envio datos ECG", 2048, NULL, 5, &task_handle_ecg);
 	xTaskCreate(procesAndSendPpg, "Leo y envio datos PPG", 2048, NULL, 5, &task_handle_ppg);
 
-
-	while(1){
-        vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
-        switch(BleStatus()){
-            case BLE_OFF:
-                LedOff(LED_BT);
-            break;
-            case BLE_DISCONNECTED:
-                LedToggle(LED_BT);
-            break;
-            case BLE_CONNECTED:
-                LedOn(LED_BT);
-            break;
-        }
-	}
+	// while(1){
+    //     vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
+    //     switch(BleStatus()){
+    //         case BLE_OFF:
+    //             LedOff(LED_BT);
+    //         break;
+    //         case BLE_DISCONNECTED:
+    //             LedToggle(LED_BT);
+    //         break;
+    //         case BLE_CONNECTED:
+    //             LedOn(LED_BT);
+    //         break;
+    //     }
+	// }
 }
 /*==================[end of file]============================================*/

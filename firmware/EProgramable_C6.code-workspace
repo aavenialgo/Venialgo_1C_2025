@@ -52,10 +52,10 @@
             "path": "middelware"
         },
         {
-            "path": "projects/prueba_ppg"
+            "path": "projects/ecg_prueba"
         },
         {
-            "path": "projects/ecg_prueba"
+            "path": "projects/ppg_prueba"
         }
     ],
     "settings": {
@@ -111,7 +111,8 @@
             "soc_caps.h": "c",
             "mpu6050.h": "c",
             "i2c_mcu.h": "c",
-            "ble_mcu.h": "c"
+            "ble_mcu.h": "c",
+            "esp_bt.h": "c"
         },
     },
     "tasks": {
