@@ -6,9 +6,9 @@
  * una placa y otro de biopotenciales (para levantar un ECG), los cuales se 
  * encuentran conectados a un microcontrolador ESP32.
  * El objetivo del proyecto es la lectura de los datos de ambos sensores y su
- * posterior envio a ECG a una script de Pyhton mediante bluetooth y PPG a un puerto serie.
- * Constara de un procesamiento basico de las señales como filtro para mejorar
- * su calidad.
+ * posterior envio a ECG a una script de Pyhton mediante bluetooth y PPG a un
+ * puerto serie. Constara de un procesamiento basico de las señales como filtro
+ * para mejorar su calidad.
  *
  * @section hardConn Hardware Connection
  *
@@ -22,7 +22,7 @@
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
  * | 22/05/2025 | Document creation		                         |
- *
+ * | 18/05/2025 | End											 |
  * @author Andres Venialgo
  *
  */
@@ -52,10 +52,12 @@
 #define T_SENIAL 4000
 /*! @brief Tamaño del chunk de datos a procesar. */
 #define CHUNK 8
-/*! @brief Frecuencia de muestreo del PPG en Hz. */
 
+/*! @brief Valor leido en el ECG. */
 uint16_t valor_actual = 0;
+/*! @brief Buffer para almacenar los datos del ECG. */
 static float ecg_filt[CHUNK] = {0};
+/*! @brief Buffer para almacenar los datos filtrados del ECG. */
 static float ecg_muestra[CHUNK] = {0};
 
 /*==================[internal data definition]===============================*/
@@ -74,10 +76,10 @@ analog_input_config_t poteInput = {
 ble_config_t ble_configuration = {
 	"ESP_WAR_MACHINE",
 	BLE_NO_INT };
+
 /*==================[internal functions declaration]=========================*/
 /** 
  * @brief Tarea que lee el valor del ECG, lo procesa y lo envía por Bluetooth.
- * 
 */
 static void processAndSendEcg(void *pvParameter)
 {
@@ -190,6 +192,11 @@ void inicialitePeripherals(){
 
 }
 /*==================[external functions definition]==========================*/
+/** @brief Funcion Principal  
+ *  @details Configura los periféricos, inicializa los temporizadores y crea las tareas
+ * necesarias para la lectura del ECG y PPG. Tambien gestiona y el parpadeo del LED de estado
+ * de bluetooth.
+ * */
 void app_main(void){
 	inicialitePeripherals();
 
