@@ -2,11 +2,11 @@
  *
  * @section genDesc General Description
  *	Este es el proyecto integrador de la asignatura electronica programable.
- * El mismo consiste la utilizacion de dos sensores, uno de ppg y otro de 
- * biopotenciales (para levantar un ECG), los cuales se encuentran conectados a 
- * un microcontrolador ESP32.
+ * El mismo consiste la utilizacion de dos sensores, uno de ppg, montado en
+ * una placa y otro de biopotenciales (para levantar un ECG), los cuales se 
+ * encuentran conectados a un microcontrolador ESP32.
  * El objetivo del proyecto es la lectura de los datos de ambos sensores y su
- * posterior envio a una aplicacion movil mediante bluetooth.
+ * posterior envio a ECG a una script de Pyhton mediante bluetooth y PPG a un puerto serie.
  * Constara de un procesamiento basico de las señales como filtro para mejorar
  * su calidad.
  *
@@ -14,8 +14,8 @@
  *
  * |    Peripheral  |   ESP32   	|
  * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
- *
+ * |   ECG Input    |    GPIO_02    |
+ * |   PPG Input    |    GPIO_01    |
  *
  * @section changelog Changelog
  *
@@ -40,42 +40,45 @@
 #include "ble_mcu.h"
 #include "analog_io_mcu.h"
 #include "uart_mcu.h"
-#include "neopixel_stripe.h"
-
-//#include "spo2_algorithm.h"
-//#include <max3010x.h>
 
 /*==================[macros and definitions]=================================*/
+/*! @brief Periodo de parpadeo del LED en milisegundos. */
 #define CONFIG_BLINK_PERIOD 500
+/*! @brief LED utilizado para indicar el estado del Bluetooth. */
 #define LED_BT LED_1
+/*! @brief Frecuencia de muestreo del ECG en Hz. */
 #define SAMPLE_FREQ 200
+/*! @brief Periodo de muestreo del ECG en microsegundos. */
 #define T_SENIAL 4000
+/*! @brief Tamaño del chunk de datos a procesar. */
 #define CHUNK 8
-#define PERIODO_REFRACTARIO 250000
-#define PERIODO_MUESTREO 10000
+/*! @brief Frecuencia de muestreo del PPG en Hz. */
 
-uint8_t muestras_en_periodo_refractario = PERIODO_REFRACTARIO / PERIODO_MUESTREO;
-int16_t UMBRAL_ONDA_R = 400;
-int16_t UMBRAL_INF_FC = 60;
-int16_t UMBRAL_SUP_FC = 80;
 uint16_t valor_actual = 0;
-
 static float ecg_filt[CHUNK] = {0};
 static float ecg_muestra[CHUNK] = {0};
 
 /*==================[internal data definition]===============================*/
-bool filter = false;
+/*! @brief Handle para la tarea de procesamiento y envío de datos del ECG. */
 TaskHandle_t task_handle_ecg = NULL;
 
-analog_input_config_t poteInput = {  //senial
-    .input = CH2, 
-};
+/*! @brief handle para la tarea de procesamiento y envío de datos del PPG.
+ */
 TaskHandle_t task_handle_ppg = NULL;
 
-float dato_filt;
-float dato;
+/*! @brief Configuración del canal ADC para leer el valor del PPG. */
+analog_input_config_t poteInput = { 
+    .input = CH2, 
+};
+/*! @brief Configuración del Bluetooth. */
+ble_config_t ble_configuration = {
+	"ESP_WAR_MACHINE",
+	BLE_NO_INT };
 /*==================[internal functions declaration]=========================*/
-
+/** 
+ * @brief Tarea que lee el valor del ECG, lo procesa y lo envía por Bluetooth.
+ * 
+*/
 static void processAndSendEcg(void *pvParameter)
 {
 	uint16_t valor = 0;
@@ -106,8 +109,13 @@ static void processAndSendEcg(void *pvParameter)
 		}
 	}
 }
+/**
+ * @brief Tarea que lee el valor del PPG, lo procesa y lo envia por Bluetooth.
+ * 
+ * @param pvParameter Parametro de entrada (no utilizado).
+ */
 void procesAndSendPpg(void *pvParameter)
-{	 char msg[32];
+{	char msg[32];
     float analog_raw, analog_hp, analog_filt;
     uint16_t adcValue = 0;
     while(true){
@@ -119,49 +127,34 @@ void procesAndSendPpg(void *pvParameter)
         HiPassFilter(&analog_raw, &analog_hp, 1);
         LowPassFilter(&analog_hp, &analog_filt, 1);
         snprintf(msg, sizeof(msg), "%0.2f\n", analog_filt);
-		printf(">PPG:%0.2f\r\n", analog_filt);		
-		
-		//BleSendString(msg);
-
-		// Enviar el valor del ADC por UART
- 		// UartSendString(CH1, ">ad:");
- 		// UartSendString(CH1, (char*)UartItoa(adcValue,10));
- 		// UartSendString(CH1, " \r\n");
-		// UartSendString(CH1, ">ad:");
- 		// UartSendString(CH1, (char*)UartItoa(adcValue,10));
- 		// UartSendString(CH1, " \r\n");
-        //BleSendString(msg);
+		printf(">PPG:%0.2f\r\n", analog_filt);
     }
 }
-
-// void processAndSendPpg(void *pvParameter)
-// {	while(true){
-// 		uint16_t adcValue = 0;
-// 		AnalogInputReadSingle(poteInput.input, &adcValue);
-// 		UartSendString(CH1, ">ad:");
-// 		UartSendString(CH1, (char*)UartItoa(adcValue,10));
-// 		UartSendString(CH1, " \r\n");
-// 		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-// 	}
-// }
-
+/** 
+ * @brief Función asociada al temporizador del ECG.
+ */
 void FuncTimerSenialECG(void* param){
     xTaskNotifyGive(task_handle_ecg);
 }
-
+/**
+ * @brief Función asociada al temporizador del PPG.
+ */
 void FuncTimerSenialPPG(void* param){
     xTaskNotifyGive(task_handle_ppg);
 }
 
+/**
+ * @brief Inicializa los periféricos del sistema.
+ * 
+ * Configura los LEDs, filtros, Bluetooth, temporizadores, entradas analógicas,
+ * salidas analógicas y UART.
+ */
 void inicialitePeripherals(){
 	LedsInit();
-	LedOn(LED_3);
+	LedOn(LED_3); 
 	LowPassInit(SAMPLE_FREQ, 20, ORDER_2);
     HiPassInit(SAMPLE_FREQ, 0.5, ORDER_2);
 
-	ble_config_t ble_configuration = {
-		"ESP_WAR_MACHINE_ppg",
-		BLE_NO_INT };
 	BleInit(&ble_configuration);
 
 	timer_config_t timer_ecg = {
@@ -180,8 +173,8 @@ void inicialitePeripherals(){
 
 	TimerInit(&timer_ppg);
 	TimerStart(timer_ppg.timer);
-	//TimerInit(&timer_ecg);
-    //TimerStart(timer_ecg.timer);
+	TimerInit(&timer_ecg);
+    TimerStart(timer_ecg.timer);
 
 	AnalogInputInit(&poteInput);
 	AnalogOutputInit();
@@ -192,33 +185,30 @@ void inicialitePeripherals(){
 		.func_p = NULL, 
 		.param_p = NULL
    };
-
-   UartInit(&uart_config);
-	UartSendString(CH1, ">ad: configuracion de perifericos\r\n");
-
+	UartInit(&uart_config);
+	print("Configuracion de perifericos\n");
 
 }
 /*==================[external functions definition]==========================*/
 void app_main(void){
-
 	inicialitePeripherals();
 
-//	xTaskCreate(processAndSendEcg, "Leo y envio datos ECG", 2048, NULL, 5, &task_handle_ecg);
+	xTaskCreate(processAndSendEcg, "Leo y envio datos ECG", 2048, NULL, 5, &task_handle_ecg);
 	xTaskCreate(procesAndSendPpg, "Leo y envio datos PPG", 2048, NULL, 5, &task_handle_ppg);
 
-	// while(1){
-    //     vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
-    //     switch(BleStatus()){
-    //         case BLE_OFF:
-    //             LedOff(LED_BT);
-    //         break;
-    //         case BLE_DISCONNECTED:
-    //             LedToggle(LED_BT);
-    //         break;
-    //         case BLE_CONNECTED:
-    //             LedOn(LED_BT);
-    //         break;
-    //     }
-	// }
+	while(1){
+        vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
+        switch(BleStatus()){
+            case BLE_OFF:
+                LedOff(LED_BT);
+            break;
+            case BLE_DISCONNECTED:
+                LedToggle(LED_BT);
+            break;
+            case BLE_CONNECTED:
+                LedOn(LED_BT);
+            break;
+        }
+	}
 }
 /*==================[end of file]============================================*/
