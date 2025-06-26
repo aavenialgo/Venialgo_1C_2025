@@ -134,7 +134,10 @@ static void mandarInformacionTask (void *pParameter){
         vTaskDelay(CONFIG_INFORMAR_NIVEL / portTICK_PERIOD_MS);
     }
 }
-
+/** @brief Tarea que lee el valor de la tecla y lo almacena en la variable key.
+ *  Realiza la misma tarea que la funcion asociada a la interrupcion del switch 1 y 2.
+ * Luego escribe el valor de la distancia por UART.
+ */
 void uartKey(void *param){
 	while(true){
 		if (UartReadByte(UART_PC, &key)== 0){
@@ -164,7 +167,8 @@ void functionKey1(void *pParameter){
 void functionKey2(void *pParameter){
 	medir_comida = !medir_comida;
 }
-
+/** @brief Inicializa los periféricos utilizados en el proyecto.
+ */
 void inicializarPerifericos(){
 	LedInit();
 	SwitchesInit();
@@ -187,6 +191,11 @@ void inicializarPerifericos(){
    UartInit(&uart_config);
 }
 /*==================[external functions definition]==========================*/
+/**
+ * @brief Función principal del programa.
+ * 
+ * Configura los periféricos, inicializa las tareas y comienza la ejecución del sistema.
+ */
 void app_main(void){
 	inicializarPerifericos();
 
