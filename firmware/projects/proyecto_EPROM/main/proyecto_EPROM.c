@@ -152,7 +152,7 @@ void inicialitePeripherals(){
 	TimerInit(&timer_ppg);
 	TimerStart(timer_ppg.timer);
 //	TimerInit(&timer_ecg);
-//    TimerStart(timer_ecg.timer);
+//  TimerStart(timer_ecg.timer);
 
 
 	AnalogInputInit(&poteInput);
