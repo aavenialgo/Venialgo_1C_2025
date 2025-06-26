@@ -1,0 +1,581 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Recuperatorio programable: Referencia del archivo /home/andres/repositorio/Venialgo_1C_2025/firmware/projects/recuperatorio/main/examen_Venialgo.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fiuner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Recuperatorio programable<span id="projectnumber">&#160;1.0</span>
+   </div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('examen___venialgo_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">defines</a> &#124;
+<a href="#func-members">Funciones</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo examen_Venialgo.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;freertos/FreeRTOS.h&gt;</code><br />
+<code>#include &lt;freertos/task.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="hc__sr04_8h_source.html">hc_sr04.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="led_8h_source.html">led.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="switch_8h_source.html">switch.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="timer__mcu_8h_source.html">timer_mcu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="uart__mcu_8h_source.html">uart_mcu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="analog__io__mcu_8h_source.html">analog_io_mcu.h</a>&quot;</code><br />
+</div>
+<p><a href="examen___venialgo_8c_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a2fee578ddd0e30e83b9999e51bb5d43c" id="r_a2fee578ddd0e30e83b9999e51bb5d43c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a2fee578ddd0e30e83b9999e51bb5d43c">CONFIG_MEASURE_NIVEL_AGUA</a>&#160;&#160;&#160;2000</td></tr>
+<tr class="separator:a2fee578ddd0e30e83b9999e51bb5d43c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf69c34a52a5d17782dbcc4ccd74635e" id="r_adf69c34a52a5d17782dbcc4ccd74635e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#adf69c34a52a5d17782dbcc4ccd74635e">CONFIG_MEASURE_NIVEL_COMIDA</a>&#160;&#160;&#160;5000</td></tr>
+<tr class="separator:adf69c34a52a5d17782dbcc4ccd74635e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac63ed057ec68687be902eea82847cd98" id="r_ac63ed057ec68687be902eea82847cd98"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#ac63ed057ec68687be902eea82847cd98">CONFIG_INFORMAR_NIVEL</a>&#160;&#160;&#160;10000</td></tr>
+<tr class="separator:ac63ed057ec68687be902eea82847cd98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546b812ff8251df6b1323ef7181b857c" id="r_a546b812ff8251df6b1323ef7181b857c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a546b812ff8251df6b1323ef7181b857c">PESO_MINIMO_G</a>&#160;&#160;&#160;25</td></tr>
+<tr class="separator:a546b812ff8251df6b1323ef7181b857c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7912592898ebb69cff900918f2f4664e" id="r_a7912592898ebb69cff900918f2f4664e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a7912592898ebb69cff900918f2f4664e">PESO_MAXIMO_G</a>&#160;&#160;&#160;250</td></tr>
+<tr class="separator:a7912592898ebb69cff900918f2f4664e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:ae7b6b502de29cf25b01e8c9f778ed072" id="r_ae7b6b502de29cf25b01e8c9f778ed072"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#ae7b6b502de29cf25b01e8c9f778ed072">leerPeso</a> (uint16_t adcValue)</td></tr>
+<tr class="memdesc:ae7b6b502de29cf25b01e8c9f778ed072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que lee el valor del ADC y lo convierte a peso en gramos.  <br /></td></tr>
+<tr class="separator:ae7b6b502de29cf25b01e8c9f778ed072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c659c6d7e77b67978bc4c044d2e6a17" id="r_a8c659c6d7e77b67978bc4c044d2e6a17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a8c659c6d7e77b67978bc4c044d2e6a17">uartKey</a> (void *param)</td></tr>
+<tr class="memdesc:a8c659c6d7e77b67978bc4c044d2e6a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea que lee el valor de la tecla y lo almacena en la variable key. Realiza la misma tarea que la funcion asociada a la interrupcion del switch 1 y 2. Luego escribe el valor de la distancia por UART.  <br /></td></tr>
+<tr class="separator:a8c659c6d7e77b67978bc4c044d2e6a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a5369174c904021d9425a2d9276223a" id="r_a8a5369174c904021d9425a2d9276223a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a8a5369174c904021d9425a2d9276223a">functionKey1</a> (void *pParameter)</td></tr>
+<tr class="memdesc:a8a5369174c904021d9425a2d9276223a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función asociada a la interrupción del switch 1. corresponde a medir/no medir el volumen de agua.  <br /></td></tr>
+<tr class="separator:a8a5369174c904021d9425a2d9276223a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a276e20d39a3a095cb44536d5f001ec2d" id="r_a276e20d39a3a095cb44536d5f001ec2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a276e20d39a3a095cb44536d5f001ec2d">functionKey2</a> (void *pParameter)</td></tr>
+<tr class="memdesc:a276e20d39a3a095cb44536d5f001ec2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función asociada a la interrupción del switch 2. corresponde a medir/no medir el peso de la comida.  <br /></td></tr>
+<tr class="separator:a276e20d39a3a095cb44536d5f001ec2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc1ad8f108722f0f822e84fdb2f100d" id="r_abbc1ad8f108722f0f822e84fdb2f100d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#abbc1ad8f108722f0f822e84fdb2f100d">inicializarPerifericos</a> ()</td></tr>
+<tr class="memdesc:abbc1ad8f108722f0f822e84fdb2f100d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa los periféricos utilizados en el proyecto.  <br /></td></tr>
+<tr class="separator:abbc1ad8f108722f0f822e84fdb2f100d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a630544a7f0a2cc40d8a7fefab7e2fe70" id="r_a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a> (void)</td></tr>
+<tr class="memdesc:a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función principal del programa.  <br /></td></tr>
+<tr class="separator:a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aab5def7e806409c34e84d32b05a05d06" id="r_aab5def7e806409c34e84d32b05a05d06"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#aab5def7e806409c34e84d32b05a05d06">volumen_agua</a> = 0</td></tr>
+<tr class="memdesc:aab5def7e806409c34e84d32b05a05d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable que guarda el volumen de agua en el recipiente  <br /></td></tr>
+<tr class="separator:aab5def7e806409c34e84d32b05a05d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04d83481f14c94fcbdcf6bbb4c7bf651" id="r_a04d83481f14c94fcbdcf6bbb4c7bf651"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">medir_agua</a> = true</td></tr>
+<tr class="memdesc:a04d83481f14c94fcbdcf6bbb4c7bf651"><td class="mdescLeft">&#160;</td><td class="mdescRight">booleano para activar/desactivar la medicion del volumen de agua  <br /></td></tr>
+<tr class="separator:a04d83481f14c94fcbdcf6bbb4c7bf651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af236d7fb68b9a2fc367db2561bec115b" id="r_af236d7fb68b9a2fc367db2561bec115b"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#af236d7fb68b9a2fc367db2561bec115b">peso_comida</a> = 0</td></tr>
+<tr class="memdesc:af236d7fb68b9a2fc367db2561bec115b"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable que guarda el peso de la comida  <br /></td></tr>
+<tr class="separator:af236d7fb68b9a2fc367db2561bec115b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad32e8603db9128d20baaa6c6e045b759" id="r_ad32e8603db9128d20baaa6c6e045b759"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">medir_comida</a> = true</td></tr>
+<tr class="memdesc:ad32e8603db9128d20baaa6c6e045b759"><td class="mdescLeft">&#160;</td><td class="mdescRight">booleano para activar/desactivar la medicion del peso de la comida  <br /></td></tr>
+<tr class="separator:ad32e8603db9128d20baaa6c6e045b759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3496dfc7a27df7eead65d48ed89e6867" id="r_a3496dfc7a27df7eead65d48ed89e6867"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a3496dfc7a27df7eead65d48ed89e6867">key</a> = 0</td></tr>
+<tr class="memdesc:a3496dfc7a27df7eead65d48ed89e6867"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable que almacena la tecla leída.  <br /></td></tr>
+<tr class="separator:a3496dfc7a27df7eead65d48ed89e6867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3496a2367ce7fc0d76e9ece82a5d05cc" id="r_a3496a2367ce7fc0d76e9ece82a5d05cc"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a3496a2367ce7fc0d76e9ece82a5d05cc">task_handle_agua</a> = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memdesc:a3496a2367ce7fc0d76e9ece82a5d05cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea para controlar el nivel de agua.  <br /></td></tr>
+<tr class="separator:a3496a2367ce7fc0d76e9ece82a5d05cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fdf52290aa2ec1206a56a03c3158dba" id="r_a7fdf52290aa2ec1206a56a03c3158dba"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a7fdf52290aa2ec1206a56a03c3158dba">task_handle_comida</a> = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memdesc:a7fdf52290aa2ec1206a56a03c3158dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea para controlar el nivel de comida.  <br /></td></tr>
+<tr class="separator:a7fdf52290aa2ec1206a56a03c3158dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e6dbc05a6a7567349f0d694a71fc1df" id="r_a2e6dbc05a6a7567349f0d694a71fc1df"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="examen___venialgo_8c.html#a2e6dbc05a6a7567349f0d694a71fc1df">task_handle_informar</a> = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memdesc:a2e6dbc05a6a7567349f0d694a71fc1df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea para controlar informar.  <br /></td></tr>
+<tr class="separator:a2e6dbc05a6a7567349f0d694a71fc1df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de «define»</h2>
+<a id="ac63ed057ec68687be902eea82847cd98" name="ac63ed057ec68687be902eea82847cd98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac63ed057ec68687be902eea82847cd98">&#9670;&#160;</a></span>CONFIG_INFORMAR_NIVEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_INFORMAR_NIVEL&#160;&#160;&#160;10000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00052">52</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+</div>
+</div>
+<a id="a2fee578ddd0e30e83b9999e51bb5d43c" name="a2fee578ddd0e30e83b9999e51bb5d43c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fee578ddd0e30e83b9999e51bb5d43c">&#9670;&#160;</a></span>CONFIG_MEASURE_NIVEL_AGUA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_MEASURE_NIVEL_AGUA&#160;&#160;&#160;2000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00050">50</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+</div>
+</div>
+<a id="adf69c34a52a5d17782dbcc4ccd74635e" name="adf69c34a52a5d17782dbcc4ccd74635e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf69c34a52a5d17782dbcc4ccd74635e">&#9670;&#160;</a></span>CONFIG_MEASURE_NIVEL_COMIDA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_MEASURE_NIVEL_COMIDA&#160;&#160;&#160;5000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00051">51</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+</div>
+</div>
+<a id="a7912592898ebb69cff900918f2f4664e" name="a7912592898ebb69cff900918f2f4664e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7912592898ebb69cff900918f2f4664e">&#9670;&#160;</a></span>PESO_MAXIMO_G</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PESO_MAXIMO_G&#160;&#160;&#160;250</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00054">54</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+</div>
+</div>
+<a id="a546b812ff8251df6b1323ef7181b857c" name="a546b812ff8251df6b1323ef7181b857c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a546b812ff8251df6b1323ef7181b857c">&#9670;&#160;</a></span>PESO_MINIMO_G</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PESO_MINIMO_G&#160;&#160;&#160;25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00053">53</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de funciones</h2>
+<a id="a630544a7f0a2cc40d8a7fefab7e2fe70" name="a630544a7f0a2cc40d8a7fefab7e2fe70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a630544a7f0a2cc40d8a7fefab7e2fe70">&#9670;&#160;</a></span>app_main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void app_main </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función principal del programa. </p>
+<p>Configura los periféricos, inicializa las tareas y comienza la ejecución del sistema. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00199">199</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="examen___venialgo_8c_source.html#l00172">inicializarPerifericos()</a>, <a class="el" href="ili9341_8c_source.html#l00019">NULL</a>, <a class="el" href="examen___venialgo_8c_source.html#l00057">task_handle_agua</a>, <a class="el" href="examen___venialgo_8c_source.html#l00059">task_handle_comida</a>, <a class="el" href="examen___venialgo_8c_source.html#l00061">task_handle_informar</a> y <a class="el" href="examen___venialgo_8c_source.html#l00141">uartKey()</a>.</p>
+
+</div>
+</div>
+<a id="a8a5369174c904021d9425a2d9276223a" name="a8a5369174c904021d9425a2d9276223a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a5369174c904021d9425a2d9276223a">&#9670;&#160;</a></span>functionKey1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void functionKey1 </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pParameter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función asociada a la interrupción del switch 1. corresponde a medir/no medir el volumen de agua. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00162">162</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="examen___venialgo_8c_source.html#l00041">medir_agua</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00172">inicializarPerifericos()</a>.</p>
+
+</div>
+</div>
+<a id="a276e20d39a3a095cb44536d5f001ec2d" name="a276e20d39a3a095cb44536d5f001ec2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a276e20d39a3a095cb44536d5f001ec2d">&#9670;&#160;</a></span>functionKey2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void functionKey2 </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>pParameter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función asociada a la interrupción del switch 2. corresponde a medir/no medir el peso de la comida. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00167">167</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="examen___venialgo_8c_source.html#l00045">medir_comida</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00172">inicializarPerifericos()</a>.</p>
+
+</div>
+</div>
+<a id="abbc1ad8f108722f0f822e84fdb2f100d" name="abbc1ad8f108722f0f822e84fdb2f100d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc1ad8f108722f0f822e84fdb2f100d">&#9670;&#160;</a></span>inicializarPerifericos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void inicializarPerifericos </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicializa los periféricos utilizados en el proyecto. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00172">172</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="analog__io__mcu_8c_source.html#l00045">AnalogInputInit()</a>, <a class="el" href="analog__io__mcu_8c_source.html#l00120">AnalogOutputInit()</a>, <a class="el" href="uart__mcu_8h_source.html#l00040">serial_config_t::baud_rate</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00032">CH1</a>, <a class="el" href="examen___venialgo_8c_source.html#l00162">functionKey1()</a>, <a class="el" href="examen___venialgo_8c_source.html#l00167">functionKey2()</a>, <a class="el" href="gpio__mcu_8h_source.html#l00054">GPIO_2</a>, <a class="el" href="gpio__mcu_8h_source.html#l00055">GPIO_3</a>, <a class="el" href="hc__sr04_8c_source.html#l00034">HcSr04Init()</a>, <a class="el" href="analog__io__mcu_8h_source.html#l00049">analog_input_config_t::input</a>, <a class="el" href="ili9341_8c_source.html#l00019">NULL</a>, <a class="el" href="switch_8h_source.html#l00032">SWITCH_1</a>, <a class="el" href="switch_8h_source.html#l00033">SWITCH_2</a>, <a class="el" href="switch_8c_source.html#l00047">SwitchActivInt()</a>, <a class="el" href="switch_8c_source.html#l00029">SwitchesInit()</a> y <a class="el" href="uart__mcu_8c_source.html#l00107">UartInit()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00199">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="ae7b6b502de29cf25b01e8c9f778ed072" name="ae7b6b502de29cf25b01e8c9f778ed072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7b6b502de29cf25b01e8c9f778ed072">&#9670;&#160;</a></span>leerPeso()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float leerPeso </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>adcValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función que lee el valor del ADC y lo convierte a peso en gramos. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>Peso en gramos </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00092">92</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+</div>
+</div>
+<a id="a8c659c6d7e77b67978bc4c044d2e6a17" name="a8c659c6d7e77b67978bc4c044d2e6a17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c659c6d7e77b67978bc4c044d2e6a17">&#9670;&#160;</a></span>uartKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void uartKey </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>param</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tarea que lee el valor de la tecla y lo almacena en la variable key. Realiza la misma tarea que la funcion asociada a la interrupcion del switch 1 y 2. Luego escribe el valor de la distancia por UART. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00141">141</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="examen___venialgo_8c_source.html#l00047">key</a>, <a class="el" href="examen___venialgo_8c_source.html#l00041">medir_agua</a>, <a class="el" href="examen___venialgo_8c_source.html#l00045">medir_comida</a>, <a class="el" href="uart__mcu_8h_source.html#l00032">UART_PC</a> y <a class="el" href="uart__mcu_8c_source.html#l00142">UartReadByte()</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00199">app_main()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de variables</h2>
+<a id="a3496dfc7a27df7eead65d48ed89e6867" name="a3496dfc7a27df7eead65d48ed89e6867"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3496dfc7a27df7eead65d48ed89e6867">&#9670;&#160;</a></span>key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t key = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variable que almacena la tecla leída. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00047">47</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_m_f_r_c522_8c_source.html#l02147">MIFARE_SetUid()</a>, <a class="el" href="_m_f_r_c522_8c_source.html#l01035">PCD_Authenticate()</a>, <a class="el" href="_m_f_r_c522_8c_source.html#l01784">PICC_DumpMifareClassicSectorToSerial()</a>, <a class="el" href="_m_f_r_c522_8c_source.html#l01736">PICC_DumpMifareClassicToSerial()</a>, <a class="el" href="_m_f_r_c522_8c_source.html#l01650">PICC_DumpToSerial()</a> y <a class="el" href="examen___venialgo_8c_source.html#l00141">uartKey()</a>.</p>
+
+</div>
+</div>
+<a id="a04d83481f14c94fcbdcf6bbb4c7bf651" name="a04d83481f14c94fcbdcf6bbb4c7bf651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04d83481f14c94fcbdcf6bbb4c7bf651">&#9670;&#160;</a></span>medir_agua</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool medir_agua = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>booleano para activar/desactivar la medicion del volumen de agua </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00041">41</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00162">functionKey1()</a> y <a class="el" href="examen___venialgo_8c_source.html#l00141">uartKey()</a>.</p>
+
+</div>
+</div>
+<a id="ad32e8603db9128d20baaa6c6e045b759" name="ad32e8603db9128d20baaa6c6e045b759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad32e8603db9128d20baaa6c6e045b759">&#9670;&#160;</a></span>medir_comida</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool medir_comida = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>booleano para activar/desactivar la medicion del peso de la comida </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00045">45</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00167">functionKey2()</a> y <a class="el" href="examen___venialgo_8c_source.html#l00141">uartKey()</a>.</p>
+
+</div>
+</div>
+<a id="af236d7fb68b9a2fc367db2561bec115b" name="af236d7fb68b9a2fc367db2561bec115b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af236d7fb68b9a2fc367db2561bec115b">&#9670;&#160;</a></span>peso_comida</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t peso_comida = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>variable que guarda el peso de la comida </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00043">43</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+</div>
+</div>
+<a id="a3496a2367ce7fc0d76e9ece82a5d05cc" name="a3496a2367ce7fc0d76e9ece82a5d05cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3496a2367ce7fc0d76e9ece82a5d05cc">&#9670;&#160;</a></span>task_handle_agua</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t task_handle_agua = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tarea para controlar el nivel de agua. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00057">57</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00199">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a7fdf52290aa2ec1206a56a03c3158dba" name="a7fdf52290aa2ec1206a56a03c3158dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fdf52290aa2ec1206a56a03c3158dba">&#9670;&#160;</a></span>task_handle_comida</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t task_handle_comida = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tarea para controlar el nivel de comida. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00059">59</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00199">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a2e6dbc05a6a7567349f0d694a71fc1df" name="a2e6dbc05a6a7567349f0d694a71fc1df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e6dbc05a6a7567349f0d694a71fc1df">&#9670;&#160;</a></span>task_handle_informar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t task_handle_informar = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tarea para controlar informar. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00061">61</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="examen___venialgo_8c_source.html#l00199">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="aab5def7e806409c34e84d32b05a05d06" name="aab5def7e806409c34e84d32b05a05d06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab5def7e806409c34e84d32b05a05d06">&#9670;&#160;</a></span>volumen_agua</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t volumen_agua = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>variable que guarda el volumen de agua en el recipiente </p>
+
+<p class="definition">Definición en la línea <a class="el" href="examen___venialgo_8c_source.html#l00039">39</a> del archivo <a class="el" href="examen___venialgo_8c_source.html">examen_Venialgo.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="dir_429d80758da54da73083af4edd40d0b3.html">projects</a></li><li class="navelem"><a class="el" href="dir_bec49aa929b2333ea781d88dd96170b0.html">recuperatorio</a></li><li class="navelem"><a class="el" href="dir_6267c7e509f57aeb1f1118df811c00f6.html">main</a></li><li class="navelem"><a class="el" href="examen___venialgo_8c.html">examen_Venialgo.c</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

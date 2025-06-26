@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Recuperatorio programable: Archivo de código fuente /home/andres/repositorio/Venialgo_1C_2025/firmware/projects/recuperatorio/main/examen_Venialgo.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fiuner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Recuperatorio programable<span id="projectnumber">&#160;1.0</span>
+   </div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('examen___venialgo_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">examen_Venialgo.c</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="examen___venialgo_8c.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/*==================[inclusions]=============================================*/</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;freertos/FreeRTOS.h&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;freertos/task.h&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="hc__sr04_8h.html">hc_sr04.h</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="led_8h.html">led.h</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="switch_8h.html">switch.h</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="timer__mcu_8h.html">timer_mcu.h</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="uart__mcu_8h.html">uart_mcu.h</a>&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="analog__io__mcu_8h.html">analog_io_mcu.h</a>&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">/*==================[macros and definitions]=================================*/</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#aab5def7e806409c34e84d32b05a05d06">   39</a></span>int16_t <a class="code hl_variable" href="examen___venialgo_8c.html#aab5def7e806409c34e84d32b05a05d06">volumen_agua</a> = 0; </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">   41</a></span><span class="keywordtype">bool</span> <a class="code hl_variable" href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">medir_agua</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#af236d7fb68b9a2fc367db2561bec115b">   43</a></span>int16_t <a class="code hl_variable" href="examen___venialgo_8c.html#af236d7fb68b9a2fc367db2561bec115b">peso_comida</a> = 0;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">   45</a></span><span class="keywordtype">bool</span> <a class="code hl_variable" href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">medir_comida</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a3496dfc7a27df7eead65d48ed89e6867">   47</a></span>uint8_t <a class="code hl_variable" href="examen___venialgo_8c.html#a3496dfc7a27df7eead65d48ed89e6867">key</a> = 0;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a2fee578ddd0e30e83b9999e51bb5d43c">   50</a></span><span class="preprocessor">#define CONFIG_MEASURE_NIVEL_AGUA 2000 </span><span class="comment">// TIempo medicion del nivel de agua</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#adf69c34a52a5d17782dbcc4ccd74635e">   51</a></span><span class="preprocessor">#define CONFIG_MEASURE_NIVEL_COMIDA 5000 </span><span class="comment">// Tiempo medicion del nivel de comida </span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#ac63ed057ec68687be902eea82847cd98">   52</a></span><span class="preprocessor">#define CONFIG_INFORMAR_NIVEL 10000 </span><span class="comment">// Tiempo de informar el nivel de agua y comida </span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a546b812ff8251df6b1323ef7181b857c">   53</a></span><span class="preprocessor">#define PESO_MINIMO_G 25</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a7912592898ebb69cff900918f2f4664e">   54</a></span><span class="preprocessor">#define PESO_MAXIMO_G 250 </span><span class="comment">// Peso maximo de comida que se puede medir</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">/*==================[internal data definition]===============================*/</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a3496a2367ce7fc0d76e9ece82a5d05cc">   57</a></span>TaskHandle_t <a class="code hl_variable" href="examen___venialgo_8c.html#a3496a2367ce7fc0d76e9ece82a5d05cc">task_handle_agua</a> = <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>; </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a7fdf52290aa2ec1206a56a03c3158dba">   59</a></span>TaskHandle_t <a class="code hl_variable" href="examen___venialgo_8c.html#a7fdf52290aa2ec1206a56a03c3158dba">task_handle_comida</a> = <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>; <span class="comment">// Tarea para controlar la comida</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a2e6dbc05a6a7567349f0d694a71fc1df">   61</a></span>TaskHandle_t <a class="code hl_variable" href="examen___venialgo_8c.html#a2e6dbc05a6a7567349f0d694a71fc1df">task_handle_informar</a> = <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>; </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">/*==================[internal functions declaration]=========================*/</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">static</span> <span class="keywordtype">void</span> controlNivelAguaTask(<span class="keywordtype">void</span> *pParameter){</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">float</span> altura_total = 9.5;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">float</span> altura_actual;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">float</span> area_base = 31.57; </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    uint8_t distancia = 0;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">medir_agua</a>){</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            distancia = <a class="code hl_function" href="group___h_c___s_r04.html#ga73a5aaa2183e55d104d4e0c2c435e251">HcSr04ReadDistanceInCentimeters</a>();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            altura_actual = altura_total - (distancia / 100.0f); <span class="comment">// Convertir a metros</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <a class="code hl_variable" href="examen___venialgo_8c.html#aab5def7e806409c34e84d32b05a05d06">volumen_agua</a> = altura_actual * area_base * 1000; <span class="comment">// Convertir a ml</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="examen___venialgo_8c.html#aab5def7e806409c34e84d32b05a05d06">volumen_agua</a> &lt; 2500) </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <a class="code hl_function" href="group___g_i_o_p.html#gaba62250f2b0e73a98b6f35fb6078fdb1">GPIOOn</a>(<a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a6213ab680cde9fe00f518cfb26a30a6b">GPIO_5</a>);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordflow">else</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <a class="code hl_function" href="group___g_i_o_p.html#ga30ed9d97406129b9b6390154a7479d70">GPIOOff</a>(<a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a6213ab680cde9fe00f518cfb26a30a6b">GPIO_5</a>);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    vTaskDelay(<a class="code hl_define" href="examen___venialgo_8c.html#a2fee578ddd0e30e83b9999e51bb5d43c">CONFIG_MEASURE_NIVEL_AGUA</a> / portTICK_PERIOD_MS);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#ae7b6b502de29cf25b01e8c9f778ed072">   92</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="examen___venialgo_8c.html#ae7b6b502de29cf25b01e8c9f778ed072">leerPeso</a>(uint16_t adcValue){</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="comment">//suponiendo ADC 12 bits (0-4095) y de referencia de 3.3 V</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordtype">float</span> voltaje = (adcValue / 4095.0f) * 3.3f;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">float</span> peso = (voltaje - 0.5f) * (500.0f / (3.3f - 0.5f));</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">if</span> (peso &lt; 0) </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    peso = 0;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">if</span> (peso &gt; 500)</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    peso = 500;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">return</span> peso</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">static</span> <span class="keywordtype">void</span> controlNivelComidaTask(<span class="keywordtype">void</span> *pParameter){</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    uint16_t adcValue = 0;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    uint16_t comida_actual = 0;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        AnalogInputRead(<a class="code hl_enumvalue" href="group___analog___i_o.html#gga4ebdf50515e5d73c58c24fd1491770dca703cf81b7a9530ba8650e0ee2f29d68e">CH1</a>, &amp;adcValue); </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        comida_actual = <a class="code hl_function" href="examen___venialgo_8c.html#ae7b6b502de29cf25b01e8c9f778ed072">leerPeso</a>(adcValue); </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">medir_comida</a>){</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordflow">if</span> (comida_actual &lt; <a class="code hl_define" href="examen___venialgo_8c.html#a546b812ff8251df6b1323ef7181b857c">PESO_MINIMO_G</a>) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                <a class="code hl_function" href="group___g_i_o_p.html#gaba62250f2b0e73a98b6f35fb6078fdb1">GPIOOn</a>(<a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a3943e6071dec78b6bcf9586cf0de6dd3">GPIO_10</a>); </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (comida_actual &gt; <a class="code hl_define" href="examen___venialgo_8c.html#a7912592898ebb69cff900918f2f4664e">PESO_MAXIMO_G</a>) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                <a class="code hl_function" href="group___g_i_o_p.html#ga30ed9d97406129b9b6390154a7479d70">GPIOOff</a>(<a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a3943e6071dec78b6bcf9586cf0de6dd3">GPIO_10</a>); </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <a class="code hl_function" href="group___g_i_o_p.html#ga30ed9d97406129b9b6390154a7479d70">GPIOOff</a>(<a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a3943e6071dec78b6bcf9586cf0de6dd3">GPIO_10</a>); </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            }</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <a class="code hl_variable" href="examen___venialgo_8c.html#af236d7fb68b9a2fc367db2561bec115b">peso_comida</a> = comida_actual;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        vTaskDelay(<a class="code hl_define" href="examen___venialgo_8c.html#adf69c34a52a5d17782dbcc4ccd74635e">CONFIG_MEASURE_NIVEL_COMIDA</a> / portTICK_PERIOD_MS);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="keyword">static</span> <span class="keywordtype">void</span> mandarInformacionTask (<span class="keywordtype">void</span> *pParameter){</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      <span class="keywordtype">char</span> mensaje[64];</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* nombre_mascota = <span class="stringliteral">&quot;Firulais&quot;</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        snprintf(mensaje, <span class="keyword">sizeof</span>(mensaje), <span class="stringliteral">&quot;%s tiene %d g de alimento y %d ml de agua.\r\n&quot;</span>, </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                 nombre_mascota, <a class="code hl_variable" href="examen___venialgo_8c.html#af236d7fb68b9a2fc367db2561bec115b">peso_comida</a>, <a class="code hl_variable" href="examen___venialgo_8c.html#aab5def7e806409c34e84d32b05a05d06">volumen_agua</a>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <a class="code hl_function" href="group___u_a_r_t.html#ga60db217694ea24ad75fcedda3336a3a8">UartSendString</a>(<a class="code hl_enumvalue" href="group___u_a_r_t.html#gga6e1a445bae87c4cfd26710dbd4657b77af81669fbb473eedf3d1789fcf08d9056">UART_PC</a>, mensaje);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        vTaskDelay(<a class="code hl_define" href="examen___venialgo_8c.html#ac63ed057ec68687be902eea82847cd98">CONFIG_INFORMAR_NIVEL</a> / portTICK_PERIOD_MS);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
+<div class="foldopen" id="foldopen00141" data-start="{" data-end="}">
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a8c659c6d7e77b67978bc4c044d2e6a17">  141</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="examen___venialgo_8c.html#a8c659c6d7e77b67978bc4c044d2e6a17">uartKey</a>(<span class="keywordtype">void</span> *param){</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="group___u_a_r_t.html#ga37f1b16880c3ca70ed2e543566d555d2">UartReadByte</a>(<a class="code hl_enumvalue" href="group___u_a_r_t.html#gga6e1a445bae87c4cfd26710dbd4657b77af81669fbb473eedf3d1789fcf08d9056">UART_PC</a>, &amp;<a class="code hl_variable" href="examen___venialgo_8c.html#a3496dfc7a27df7eead65d48ed89e6867">key</a>)== 0){</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keywordflow">switch</span>(<a class="code hl_variable" href="examen___venialgo_8c.html#a3496dfc7a27df7eead65d48ed89e6867">key</a>){</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;w&#39;</span>: </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                    <a class="code hl_variable" href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">medir_agua</a> = !<a class="code hl_variable" href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">medir_agua</a>; </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;f&#39;</span>: </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                    <a class="code hl_variable" href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">medir_comida</a> = !<a class="code hl_variable" href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">medir_comida</a>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                <a class="code hl_variable" href="examen___venialgo_8c.html#a3496dfc7a27df7eead65d48ed89e6867">key</a> = 0;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        vTaskDelay(100 / portTICK_PERIOD_MS);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
+</div>
+<div class="foldopen" id="foldopen00162" data-start="{" data-end="}">
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a8a5369174c904021d9425a2d9276223a">  162</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="examen___venialgo_8c.html#a8a5369174c904021d9425a2d9276223a">functionKey1</a>(<span class="keywordtype">void</span> *pParameter){</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <a class="code hl_variable" href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">medir_agua</a> = !<a class="code hl_variable" href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">medir_agua</a>; </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>}</div>
+</div>
+<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a276e20d39a3a095cb44536d5f001ec2d">  167</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="examen___venialgo_8c.html#a276e20d39a3a095cb44536d5f001ec2d">functionKey2</a>(<span class="keywordtype">void</span> *pParameter){</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <a class="code hl_variable" href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">medir_comida</a> = !<a class="code hl_variable" href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">medir_comida</a>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>}</div>
+</div>
+<div class="foldopen" id="foldopen00172" data-start="{" data-end="}">
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#abbc1ad8f108722f0f822e84fdb2f100d">  172</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="examen___venialgo_8c.html#abbc1ad8f108722f0f822e84fdb2f100d">inicializarPerifericos</a>(){</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    LedInit();</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <a class="code hl_function" href="group___switch.html#ga8eb2865a73bf2d2b9fd6760958a0cc3c">SwitchesInit</a>();</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <a class="code hl_function" href="group___switch.html#ga9847b9081e3cb39dd3ec01eaee8323b2">SwitchActivInt</a>(<a class="code hl_enumvalue" href="group___switch.html#gga8caa2df6d25fea5a14eb4533df1d5cfaa24caa46485c5fec2211b3ebd8a1eee77">SWITCH_1</a>, <a class="code hl_function" href="examen___venialgo_8c.html#a8a5369174c904021d9425a2d9276223a">functionKey1</a>, <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <a class="code hl_function" href="group___switch.html#ga9847b9081e3cb39dd3ec01eaee8323b2">SwitchActivInt</a>(<a class="code hl_enumvalue" href="group___switch.html#gga8caa2df6d25fea5a14eb4533df1d5cfaa73fda67835d5d51aa9251fee781a7434">SWITCH_2</a>, <a class="code hl_function" href="examen___venialgo_8c.html#a276e20d39a3a095cb44536d5f001ec2d">functionKey2</a>, <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <a class="code hl_function" href="group___h_c___s_r04.html#ga9d26cc017fe45c607d08231ebffb46c4">HcSr04Init</a>(<a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a426d08ab85ab3aebbb53eed1a32dfb71">GPIO_3</a>, <a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393abbea21b656f1917800d9d279b685f38e">GPIO_2</a>); <span class="comment">// Trigger y Echo</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <a class="code hl_struct" href="structanalog__input__config__t.html">analog_input_config_t</a> medicion= {  <span class="comment">//senial balanza</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    .<a class="code hl_variable" href="structanalog__input__config__t.html#a16d10b35d778a5d4fdbda4d75981d310">input</a> = <a class="code hl_enumvalue" href="group___analog___i_o.html#gga4ebdf50515e5d73c58c24fd1491770dca703cf81b7a9530ba8650e0ee2f29d68e">CH1</a>, </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    };</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <a class="code hl_function" href="group___analog___i_o.html#ga24ce5556aa4682468220b982f151cdfe">AnalogInputInit</a>(&amp;medicion); <span class="comment">// Configuracion del ADC para medir el nivel de agua y comida</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <a class="code hl_function" href="group___analog___i_o.html#gab57399e946247652a096a0e2d3a1b69a">AnalogOutputInit</a>();</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <a class="code hl_struct" href="structserial__config__t.html">serial_config_t</a> uart_config = {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        .<a class="code hl_variable" href="structserial__config__t.html#a148f33bbcda8087a77d8ba30f7e3c502">baud_rate</a> = 115200,</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        .port = <a class="code hl_enumvalue" href="group___analog___i_o.html#gga4ebdf50515e5d73c58c24fd1491770dca703cf81b7a9530ba8650e0ee2f29d68e">CH1</a>,</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        .func_p = <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        .param_p = <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>   };</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>   <a class="code hl_function" href="group___u_a_r_t.html#ga440f6a03dfd8b310f5fdf42c3bf20c42">UartInit</a>(&amp;uart_config);</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>}</div>
+</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">/*==================[external functions definition]==========================*/</span></div>
+<div class="foldopen" id="foldopen00199" data-start="{" data-end="}">
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="examen___venialgo_8c.html#a630544a7f0a2cc40d8a7fefab7e2fe70">  199</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="examen___venialgo_8c.html#a630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a>(<span class="keywordtype">void</span>){</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <a class="code hl_function" href="examen___venialgo_8c.html#abbc1ad8f108722f0f822e84fdb2f100d">inicializarPerifericos</a>();</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    xTaskCreate(controlNivelAguaTask, <span class="stringliteral">&quot;Medir Nivel Agua&quot;</span>, 2048, <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, 5, &amp;<a class="code hl_variable" href="examen___venialgo_8c.html#a3496a2367ce7fc0d76e9ece82a5d05cc">task_handle_agua</a>);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    xTaskCreate(controlNivelComidaTask, <span class="stringliteral">&quot;Medir Nivel Comida&quot;</span>, 2048, <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, 5, &amp;<a class="code hl_variable" href="examen___venialgo_8c.html#a7fdf52290aa2ec1206a56a03c3158dba">task_handle_comida</a>);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    xTaskCreate(mandarInformacionTask, <span class="stringliteral">&quot;Informar Nivel&quot;</span>, 2048, <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, 5, &amp;<a class="code hl_variable" href="examen___venialgo_8c.html#a2e6dbc05a6a7567349f0d694a71fc1df">task_handle_informar</a>);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    xTaskCreate(<a class="code hl_function" href="examen___venialgo_8c.html#a8c659c6d7e77b67978bc4c044d2e6a17">uartKey</a>, <span class="stringliteral">&quot;Leer Tecla&quot;</span>, 2048, <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, 5, <a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>}</div>
+</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">/*==================[end of file]============================================*/</span></div>
+<div class="ttc" id="aanalog__io__mcu_8h_html"><div class="ttname"><a href="analog__io__mcu_8h.html">analog_io_mcu.h</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a04d83481f14c94fcbdcf6bbb4c7bf651"><div class="ttname"><a href="examen___venialgo_8c.html#a04d83481f14c94fcbdcf6bbb4c7bf651">medir_agua</a></div><div class="ttdeci">bool medir_agua</div><div class="ttdoc">booleano para activar/desactivar la medicion del volumen de agua</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00041">examen_Venialgo.c:41</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a276e20d39a3a095cb44536d5f001ec2d"><div class="ttname"><a href="examen___venialgo_8c.html#a276e20d39a3a095cb44536d5f001ec2d">functionKey2</a></div><div class="ttdeci">void functionKey2(void *pParameter)</div><div class="ttdoc">Función asociada a la interrupción del switch 2. corresponde a medir/no medir el peso de la comida.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00167">examen_Venialgo.c:167</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a2e6dbc05a6a7567349f0d694a71fc1df"><div class="ttname"><a href="examen___venialgo_8c.html#a2e6dbc05a6a7567349f0d694a71fc1df">task_handle_informar</a></div><div class="ttdeci">TaskHandle_t task_handle_informar</div><div class="ttdoc">Tarea para controlar informar.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00061">examen_Venialgo.c:61</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a2fee578ddd0e30e83b9999e51bb5d43c"><div class="ttname"><a href="examen___venialgo_8c.html#a2fee578ddd0e30e83b9999e51bb5d43c">CONFIG_MEASURE_NIVEL_AGUA</a></div><div class="ttdeci">#define CONFIG_MEASURE_NIVEL_AGUA</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00050">examen_Venialgo.c:50</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a3496a2367ce7fc0d76e9ece82a5d05cc"><div class="ttname"><a href="examen___venialgo_8c.html#a3496a2367ce7fc0d76e9ece82a5d05cc">task_handle_agua</a></div><div class="ttdeci">TaskHandle_t task_handle_agua</div><div class="ttdoc">Tarea para controlar el nivel de agua.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00057">examen_Venialgo.c:57</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a3496dfc7a27df7eead65d48ed89e6867"><div class="ttname"><a href="examen___venialgo_8c.html#a3496dfc7a27df7eead65d48ed89e6867">key</a></div><div class="ttdeci">uint8_t key</div><div class="ttdoc">Variable que almacena la tecla leída.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00047">examen_Venialgo.c:47</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a546b812ff8251df6b1323ef7181b857c"><div class="ttname"><a href="examen___venialgo_8c.html#a546b812ff8251df6b1323ef7181b857c">PESO_MINIMO_G</a></div><div class="ttdeci">#define PESO_MINIMO_G</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00053">examen_Venialgo.c:53</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a630544a7f0a2cc40d8a7fefab7e2fe70"><div class="ttname"><a href="examen___venialgo_8c.html#a630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a></div><div class="ttdeci">void app_main(void)</div><div class="ttdoc">Función principal del programa.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00199">examen_Venialgo.c:199</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a7912592898ebb69cff900918f2f4664e"><div class="ttname"><a href="examen___venialgo_8c.html#a7912592898ebb69cff900918f2f4664e">PESO_MAXIMO_G</a></div><div class="ttdeci">#define PESO_MAXIMO_G</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00054">examen_Venialgo.c:54</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a7fdf52290aa2ec1206a56a03c3158dba"><div class="ttname"><a href="examen___venialgo_8c.html#a7fdf52290aa2ec1206a56a03c3158dba">task_handle_comida</a></div><div class="ttdeci">TaskHandle_t task_handle_comida</div><div class="ttdoc">Tarea para controlar el nivel de comida.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00059">examen_Venialgo.c:59</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a8a5369174c904021d9425a2d9276223a"><div class="ttname"><a href="examen___venialgo_8c.html#a8a5369174c904021d9425a2d9276223a">functionKey1</a></div><div class="ttdeci">void functionKey1(void *pParameter)</div><div class="ttdoc">Función asociada a la interrupción del switch 1. corresponde a medir/no medir el volumen de agua.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00162">examen_Venialgo.c:162</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_a8c659c6d7e77b67978bc4c044d2e6a17"><div class="ttname"><a href="examen___venialgo_8c.html#a8c659c6d7e77b67978bc4c044d2e6a17">uartKey</a></div><div class="ttdeci">void uartKey(void *param)</div><div class="ttdoc">Tarea que lee el valor de la tecla y lo almacena en la variable key. Realiza la misma tarea que la fu...</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00141">examen_Venialgo.c:141</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_aab5def7e806409c34e84d32b05a05d06"><div class="ttname"><a href="examen___venialgo_8c.html#aab5def7e806409c34e84d32b05a05d06">volumen_agua</a></div><div class="ttdeci">int16_t volumen_agua</div><div class="ttdoc">variable que guarda el volumen de agua en el recipiente</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00039">examen_Venialgo.c:39</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_abbc1ad8f108722f0f822e84fdb2f100d"><div class="ttname"><a href="examen___venialgo_8c.html#abbc1ad8f108722f0f822e84fdb2f100d">inicializarPerifericos</a></div><div class="ttdeci">void inicializarPerifericos()</div><div class="ttdoc">Inicializa los periféricos utilizados en el proyecto.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00172">examen_Venialgo.c:172</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_ac63ed057ec68687be902eea82847cd98"><div class="ttname"><a href="examen___venialgo_8c.html#ac63ed057ec68687be902eea82847cd98">CONFIG_INFORMAR_NIVEL</a></div><div class="ttdeci">#define CONFIG_INFORMAR_NIVEL</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00052">examen_Venialgo.c:52</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_ad32e8603db9128d20baaa6c6e045b759"><div class="ttname"><a href="examen___venialgo_8c.html#ad32e8603db9128d20baaa6c6e045b759">medir_comida</a></div><div class="ttdeci">bool medir_comida</div><div class="ttdoc">booleano para activar/desactivar la medicion del peso de la comida</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00045">examen_Venialgo.c:45</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_adf69c34a52a5d17782dbcc4ccd74635e"><div class="ttname"><a href="examen___venialgo_8c.html#adf69c34a52a5d17782dbcc4ccd74635e">CONFIG_MEASURE_NIVEL_COMIDA</a></div><div class="ttdeci">#define CONFIG_MEASURE_NIVEL_COMIDA</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00051">examen_Venialgo.c:51</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_ae7b6b502de29cf25b01e8c9f778ed072"><div class="ttname"><a href="examen___venialgo_8c.html#ae7b6b502de29cf25b01e8c9f778ed072">leerPeso</a></div><div class="ttdeci">float leerPeso(uint16_t adcValue)</div><div class="ttdoc">Función que lee el valor del ADC y lo convierte a peso en gramos.</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00092">examen_Venialgo.c:92</a></div></div>
+<div class="ttc" id="aexamen___venialgo_8c_html_af236d7fb68b9a2fc367db2561bec115b"><div class="ttname"><a href="examen___venialgo_8c.html#af236d7fb68b9a2fc367db2561bec115b">peso_comida</a></div><div class="ttdeci">int16_t peso_comida</div><div class="ttdoc">variable que guarda el peso de la comida</div><div class="ttdef"><b>Definition</b> <a href="examen___venialgo_8c_source.html#l00043">examen_Venialgo.c:43</a></div></div>
+<div class="ttc" id="agroup___analog___i_o_html_ga24ce5556aa4682468220b982f151cdfe"><div class="ttname"><a href="group___analog___i_o.html#ga24ce5556aa4682468220b982f151cdfe">AnalogInputInit</a></div><div class="ttdeci">void AnalogInputInit(analog_input_config_t *config)</div><div class="ttdoc">Analog input initialization.</div><div class="ttdef"><b>Definition</b> <a href="analog__io__mcu_8c_source.html#l00045">analog_io_mcu.c:45</a></div></div>
+<div class="ttc" id="agroup___analog___i_o_html_gab57399e946247652a096a0e2d3a1b69a"><div class="ttname"><a href="group___analog___i_o.html#gab57399e946247652a096a0e2d3a1b69a">AnalogOutputInit</a></div><div class="ttdeci">void AnalogOutputInit(void)</div><div class="ttdoc">Analog output initialization (DAC)</div><div class="ttdef"><b>Definition</b> <a href="analog__io__mcu_8c_source.html#l00120">analog_io_mcu.c:120</a></div></div>
+<div class="ttc" id="agroup___analog___i_o_html_gga4ebdf50515e5d73c58c24fd1491770dca703cf81b7a9530ba8650e0ee2f29d68e"><div class="ttname"><a href="group___analog___i_o.html#gga4ebdf50515e5d73c58c24fd1491770dca703cf81b7a9530ba8650e0ee2f29d68e">CH1</a></div><div class="ttdeci">@ CH1</div><div class="ttdef"><b>Definition</b> <a href="analog__io__mcu_8h_source.html#l00032">analog_io_mcu.h:32</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ga30ed9d97406129b9b6390154a7479d70"><div class="ttname"><a href="group___g_i_o_p.html#ga30ed9d97406129b9b6390154a7479d70">GPIOOff</a></div><div class="ttdeci">void GPIOOff(gpio_t pin)</div><div class="ttdoc">Change GPIO state to low.</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8c_source.html#l00086">gpio_mcu.c:86</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_gaba62250f2b0e73a98b6f35fb6078fdb1"><div class="ttname"><a href="group___g_i_o_p.html#gaba62250f2b0e73a98b6f35fb6078fdb1">GPIOOn</a></div><div class="ttdeci">void GPIOOn(gpio_t pin)</div><div class="ttdoc">Change GPIO state to high.</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8c_source.html#l00081">gpio_mcu.c:81</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393a3943e6071dec78b6bcf9586cf0de6dd3"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a3943e6071dec78b6bcf9586cf0de6dd3">GPIO_10</a></div><div class="ttdeci">@ GPIO_10</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00062">gpio_mcu.h:62</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393a426d08ab85ab3aebbb53eed1a32dfb71"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a426d08ab85ab3aebbb53eed1a32dfb71">GPIO_3</a></div><div class="ttdeci">@ GPIO_3</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00055">gpio_mcu.h:55</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393a6213ab680cde9fe00f518cfb26a30a6b"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a6213ab680cde9fe00f518cfb26a30a6b">GPIO_5</a></div><div class="ttdeci">@ GPIO_5</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00057">gpio_mcu.h:57</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393abbea21b656f1917800d9d279b685f38e"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393abbea21b656f1917800d9d279b685f38e">GPIO_2</a></div><div class="ttdeci">@ GPIO_2</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00054">gpio_mcu.h:54</a></div></div>
+<div class="ttc" id="agroup___h_c___s_r04_html_ga73a5aaa2183e55d104d4e0c2c435e251"><div class="ttname"><a href="group___h_c___s_r04.html#ga73a5aaa2183e55d104d4e0c2c435e251">HcSr04ReadDistanceInCentimeters</a></div><div class="ttdeci">uint16_t HcSr04ReadDistanceInCentimeters(void)</div><div class="ttdoc">Read distance.</div><div class="ttdef"><b>Definition</b> <a href="hc__sr04_8c_source.html#l00045">hc_sr04.c:45</a></div></div>
+<div class="ttc" id="agroup___h_c___s_r04_html_ga9d26cc017fe45c607d08231ebffb46c4"><div class="ttname"><a href="group___h_c___s_r04.html#ga9d26cc017fe45c607d08231ebffb46c4">HcSr04Init</a></div><div class="ttdeci">bool HcSr04Init(gpio_t echo, gpio_t trigger)</div><div class="ttdoc">Driver for reading distance with HC-SR04 module.</div><div class="ttdef"><b>Definition</b> <a href="hc__sr04_8c_source.html#l00034">hc_sr04.c:34</a></div></div>
+<div class="ttc" id="agroup___switch_html_ga8eb2865a73bf2d2b9fd6760958a0cc3c"><div class="ttname"><a href="group___switch.html#ga8eb2865a73bf2d2b9fd6760958a0cc3c">SwitchesInit</a></div><div class="ttdeci">int8_t SwitchesInit(void)</div><div class="ttdoc">ESP-EDU switches initialization.</div><div class="ttdef"><b>Definition</b> <a href="switch_8c_source.html#l00029">switch.c:29</a></div></div>
+<div class="ttc" id="agroup___switch_html_ga9847b9081e3cb39dd3ec01eaee8323b2"><div class="ttname"><a href="group___switch.html#ga9847b9081e3cb39dd3ec01eaee8323b2">SwitchActivInt</a></div><div class="ttdeci">void SwitchActivInt(switch_t tec, void *ptrIntFunc, void *args)</div><div class="ttdoc">Enables the interruption of a particular key and assigns a callback function.</div><div class="ttdef"><b>Definition</b> <a href="switch_8c_source.html#l00047">switch.c:47</a></div></div>
+<div class="ttc" id="agroup___switch_html_gga8caa2df6d25fea5a14eb4533df1d5cfaa24caa46485c5fec2211b3ebd8a1eee77"><div class="ttname"><a href="group___switch.html#gga8caa2df6d25fea5a14eb4533df1d5cfaa24caa46485c5fec2211b3ebd8a1eee77">SWITCH_1</a></div><div class="ttdeci">@ SWITCH_1</div><div class="ttdef"><b>Definition</b> <a href="switch_8h_source.html#l00032">switch.h:32</a></div></div>
+<div class="ttc" id="agroup___switch_html_gga8caa2df6d25fea5a14eb4533df1d5cfaa73fda67835d5d51aa9251fee781a7434"><div class="ttname"><a href="group___switch.html#gga8caa2df6d25fea5a14eb4533df1d5cfaa73fda67835d5d51aa9251fee781a7434">SWITCH_2</a></div><div class="ttdeci">@ SWITCH_2</div><div class="ttdef"><b>Definition</b> <a href="switch_8h_source.html#l00033">switch.h:33</a></div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga37f1b16880c3ca70ed2e543566d555d2"><div class="ttname"><a href="group___u_a_r_t.html#ga37f1b16880c3ca70ed2e543566d555d2">UartReadByte</a></div><div class="ttdeci">uint8_t UartReadByte(uart_mcu_port_t port, uint8_t *data)</div><div class="ttdoc">Read a single byte from serial port.</div><div class="ttdef"><b>Definition</b> <a href="uart__mcu_8c_source.html#l00142">uart_mcu.c:142</a></div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga440f6a03dfd8b310f5fdf42c3bf20c42"><div class="ttname"><a href="group___u_a_r_t.html#ga440f6a03dfd8b310f5fdf42c3bf20c42">UartInit</a></div><div class="ttdeci">void UartInit(serial_config_t *port_config)</div><div class="ttdoc">Serial port initialization.</div><div class="ttdef"><b>Definition</b> <a href="uart__mcu_8c_source.html#l00107">uart_mcu.c:107</a></div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_ga60db217694ea24ad75fcedda3336a3a8"><div class="ttname"><a href="group___u_a_r_t.html#ga60db217694ea24ad75fcedda3336a3a8">UartSendString</a></div><div class="ttdeci">void UartSendString(uart_mcu_port_t port, const char *msg)</div><div class="ttdoc">Send a String trough serial port.</div><div class="ttdef"><b>Definition</b> <a href="uart__mcu_8c_source.html#l00193">uart_mcu.c:193</a></div></div>
+<div class="ttc" id="agroup___u_a_r_t_html_gga6e1a445bae87c4cfd26710dbd4657b77af81669fbb473eedf3d1789fcf08d9056"><div class="ttname"><a href="group___u_a_r_t.html#gga6e1a445bae87c4cfd26710dbd4657b77af81669fbb473eedf3d1789fcf08d9056">UART_PC</a></div><div class="ttdeci">@ UART_PC</div><div class="ttdef"><b>Definition</b> <a href="uart__mcu_8h_source.html#l00032">uart_mcu.h:32</a></div></div>
+<div class="ttc" id="ahc__sr04_8h_html"><div class="ttname"><a href="hc__sr04_8h.html">hc_sr04.h</a></div></div>
+<div class="ttc" id="aili9341_8c_html_a070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition</b> <a href="ili9341_8c_source.html#l00019">ili9341.c:19</a></div></div>
+<div class="ttc" id="aled_8h_html"><div class="ttname"><a href="led_8h.html">led.h</a></div></div>
+<div class="ttc" id="astructanalog__input__config__t_html"><div class="ttname"><a href="structanalog__input__config__t.html">analog_input_config_t</a></div><div class="ttdoc">Analog inputs config structure.</div><div class="ttdef"><b>Definition</b> <a href="analog__io__mcu_8h_source.html#l00048">analog_io_mcu.h:48</a></div></div>
+<div class="ttc" id="astructanalog__input__config__t_html_a16d10b35d778a5d4fdbda4d75981d310"><div class="ttname"><a href="structanalog__input__config__t.html#a16d10b35d778a5d4fdbda4d75981d310">analog_input_config_t::input</a></div><div class="ttdeci">adc_ch_t input</div><div class="ttdef"><b>Definition</b> <a href="analog__io__mcu_8h_source.html#l00049">analog_io_mcu.h:49</a></div></div>
+<div class="ttc" id="astructserial__config__t_html"><div class="ttname"><a href="structserial__config__t.html">serial_config_t</a></div><div class="ttdoc">Serial port configuration struct.</div><div class="ttdef"><b>Definition</b> <a href="uart__mcu_8h_source.html#l00038">uart_mcu.h:38</a></div></div>
+<div class="ttc" id="astructserial__config__t_html_a148f33bbcda8087a77d8ba30f7e3c502"><div class="ttname"><a href="structserial__config__t.html#a148f33bbcda8087a77d8ba30f7e3c502">serial_config_t::baud_rate</a></div><div class="ttdeci">uint32_t baud_rate</div><div class="ttdef"><b>Definition</b> <a href="uart__mcu_8h_source.html#l00040">uart_mcu.h:40</a></div></div>
+<div class="ttc" id="aswitch_8h_html"><div class="ttname"><a href="switch_8h.html">switch.h</a></div></div>
+<div class="ttc" id="atimer__mcu_8h_html"><div class="ttname"><a href="timer__mcu_8h.html">timer_mcu.h</a></div></div>
+<div class="ttc" id="auart__mcu_8h_html"><div class="ttname"><a href="uart__mcu_8h.html">uart_mcu.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="dir_429d80758da54da73083af4edd40d0b3.html">projects</a></li><li class="navelem"><a class="el" href="dir_bec49aa929b2333ea781d88dd96170b0.html">recuperatorio</a></li><li class="navelem"><a class="el" href="dir_6267c7e509f57aeb1f1118df811c00f6.html">main</a></li><li class="navelem"><a class="el" href="examen___venialgo_8c.html">examen_Venialgo.c</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>
