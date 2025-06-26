@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto_integrador_EPROM: Archivo de código fuente C:/Repositorio/Venialgo_1C_2025/firmware/projects/proyecto_EPROM/visualizacion_bluetooth.py</title>
+<link rel="icon" href="icon.ico" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fiuner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Proyecto_integrador_EPROM<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Proyecto integrador de Electronica programable</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('visualizacion__bluetooth_8py_source.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">visualizacion_bluetooth.py</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="visualizacion__bluetooth_8py.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="namespacevisualizacion__bluetooth.html">    1</a></span><span class="keyword">import</span> asyncio</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">from</span> bleak <span class="keyword">import</span> BleakClient</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> re</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">from</span> collections <span class="keyword">import</span> deque</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespacevisualizacion__bluetooth.html#ac45b26f90501693a96eb4055049d9ba7">   12</a></span>address = <span class="stringliteral">&quot;40:4C:CA:44:57:0A&quot;</span>  <span class="comment"># Direccion MAC del dispositivo Bluetooth</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespacevisualizacion__bluetooth.html#a06599e3437a4071350c342b3b0e4c7dc">   13</a></span>char_uuid = <span class="stringliteral">&quot;0000ffe1-0000-1000-8000-00805f9b34fb&quot;</span>  <span class="comment"># UUID del servicio de datos</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespacevisualizacion__bluetooth.html#a955273de99acd06f6e2a77f673f7ea2a">   15</a></span>data_buffer = deque(maxlen=100)  <span class="comment"># Guarda los ultimos 100 datos recibidos</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="foldopen" id="foldopen00020" data-start="" data-end="">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespacevisualizacion__bluetooth.html#af4e25c9dde374c60482050877e310fde">   20</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacevisualizacion__bluetooth.html#af4e25c9dde374c60482050877e310fde">extraer_valores</a>(texto):</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="comment"># Busca todos los numeros despues de &#39;*G&#39; nota: asume que los datos estan en el formato &#39;*G123.45&#39;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">return</span> [float(x) <span class="keywordflow">for</span> x <span class="keywordflow">in</span> re.findall(<span class="stringliteral">r&#39;\*G(-?\d+\.\d+)&#39;</span>, texto)]</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span></div>
+<div class="foldopen" id="foldopen00027" data-start="" data-end="">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespacevisualizacion__bluetooth.html#ac3cf1d90eba22ac1f004bcf306ef2491">   27</a></span><span class="keyword">def </span><a class="code hl_function" href="namespacevisualizacion__bluetooth.html#ac3cf1d90eba22ac1f004bcf306ef2491">handle_data</a>(sender, data):</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    texto = data.decode(errors=<span class="stringliteral">&#39;ignore&#39;</span>)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    valores = <a class="code hl_function" href="namespacevisualizacion__bluetooth.html#af4e25c9dde374c60482050877e310fde">extraer_valores</a>(texto)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    data_buffer.extend(valores)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="foldopen" id="foldopen00033" data-start="" data-end="">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespacevisualizacion__bluetooth.html#aaab2d982388a3a34cd06fcc83397010c">   33</a></span><span class="keyword">async def </span><a class="code hl_function" href="namespacevisualizacion__bluetooth.html#aaab2d982388a3a34cd06fcc83397010c">plot_data</a>():</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    plt.ion()</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    fig, ax = plt.subplots()</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    line, = ax.plot([], [])</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    ax.set_ylim(-200, 500)  </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    ax.set_xlim(0, 100)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">while</span> <span class="keyword">True</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">if</span> data_buffer:</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            ydata = list(data_buffer)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            xdata = list(range(len(ydata)))</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            line.set_xdata(xdata)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            line.set_ydata(ydata)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            ax.relim()</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            ax.autoscale_view()</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            plt.draw()</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            plt.pause(0.001)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        await asyncio.sleep(0.001)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="foldopen" id="foldopen00052" data-start="" data-end="">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="namespacevisualizacion__bluetooth.html#a51af30a60f9f02777c6396b8247e356f">   52</a></span><span class="keyword">async def </span><a class="code hl_function" href="namespacevisualizacion__bluetooth.html#a51af30a60f9f02777c6396b8247e356f">main</a>():</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">async</span> <span class="keyword">with</span> BleakClient(address) <span class="keyword">as</span> client:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        await client.start_notify(char_uuid, handle_data)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        plot_task = asyncio.create_task(<a class="code hl_function" href="namespacevisualizacion__bluetooth.html#aaab2d982388a3a34cd06fcc83397010c">plot_data</a>())</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        await asyncio.sleep(100)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        await client.stop_notify(char_uuid)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        plot_task.cancel()</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"># Ejecuta la funcion principal</span></div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>asyncio.run(<a class="code hl_function" href="namespacevisualizacion__bluetooth.html#a51af30a60f9f02777c6396b8247e356f">main</a>())</div>
+<div class="ttc" id="anamespacevisualizacion__bluetooth_html_a51af30a60f9f02777c6396b8247e356f"><div class="ttname"><a href="namespacevisualizacion__bluetooth.html#a51af30a60f9f02777c6396b8247e356f">visualizacion_bluetooth.main</a></div><div class="ttdeci">main()</div><div class="ttdoc">Funcion principal que gestiona la conexion Bluetooth y la visualizacion.</div><div class="ttdef"><b>Definition</b> <a href="#l00052">visualizacion_bluetooth.py:52</a></div></div>
+<div class="ttc" id="anamespacevisualizacion__bluetooth_html_aaab2d982388a3a34cd06fcc83397010c"><div class="ttname"><a href="namespacevisualizacion__bluetooth.html#aaab2d982388a3a34cd06fcc83397010c">visualizacion_bluetooth.plot_data</a></div><div class="ttdeci">plot_data()</div><div class="ttdoc">Corrutina que actualiza en tiempo real la grafica con los datos recibidos.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">visualizacion_bluetooth.py:33</a></div></div>
+<div class="ttc" id="anamespacevisualizacion__bluetooth_html_ac3cf1d90eba22ac1f004bcf306ef2491"><div class="ttname"><a href="namespacevisualizacion__bluetooth.html#ac3cf1d90eba22ac1f004bcf306ef2491">visualizacion_bluetooth.handle_data</a></div><div class="ttdeci">handle_data(sender, data)</div><div class="ttdoc">Callback para manejar los datos recibidos por Bluetooth.</div><div class="ttdef"><b>Definition</b> <a href="#l00027">visualizacion_bluetooth.py:27</a></div></div>
+<div class="ttc" id="anamespacevisualizacion__bluetooth_html_af4e25c9dde374c60482050877e310fde"><div class="ttname"><a href="namespacevisualizacion__bluetooth.html#af4e25c9dde374c60482050877e310fde">visualizacion_bluetooth.extraer_valores</a></div><div class="ttdeci">extraer_valores(texto)</div><div class="ttdoc">Extrae valores numericos flotantes precedidos por &#39;*G&#39; de un texto.</div><div class="ttdef"><b>Definition</b> <a href="#l00020">visualizacion_bluetooth.py:20</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a class="el" href="dir_429d80758da54da73083af4edd40d0b3.html">projects</a></li><li class="navelem"><a class="el" href="dir_e4b2955d08b79fd28af0eb0c9749bb80.html">proyecto_EPROM</a></li><li class="navelem"><a class="el" href="visualizacion__bluetooth_8py.html">visualizacion_bluetooth.py</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>
